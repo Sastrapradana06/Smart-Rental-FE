@@ -1,0 +1,40 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+.color-primary {
+  color: rgb(255, 101, 48);
+}
+
+.color-secondary {
+  color: rgb(255, 76, 49);
+}
+
+.border-rr {
+  border: 1px solid red;
+}
+
+.nav-link {
+  @apply justify-center items-center hidden lg:flex;
+}
+
+.flex-vertical {
+  @apply flex flex-col justify-center items-center;
+}
+
+.flex-horizontal {
+  @apply flex  justify-center items-center;
+}
+
+.nav {
+  @apply w-[100%] h-[100px] flex items-center justify-between  px-4 lg:px-[100px] fixed top-0 z-[100];
+}
+
+.text-link {
+  @apply text-[.9rem];
+}
+
+.text-link:hover {
+  color: rgb(255, 101, 48);
+  transition: all 0.2s ease-in-out;
+}
