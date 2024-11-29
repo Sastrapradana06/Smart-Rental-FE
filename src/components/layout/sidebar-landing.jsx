@@ -46,7 +46,7 @@ const SidebarLanding = ({ opened, close }) => {
           </p>
         </a>
         <LinkList link="#about" teks="About" />
-        <LinkList link="#variants" teks="Variants Models" />
+        <LinkList link="#vehicle" teks="Vehicle Models" />
         <LinkList link="#contact" teks="Contact" />
       </div>
     </Drawer>

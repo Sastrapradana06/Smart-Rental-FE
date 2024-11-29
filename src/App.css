@@ -30,7 +30,7 @@ li {
 
 .bg-blur {
   backdrop-filter: blur(10px);
-  background-color: rgba(255, 255, 255, 0.5);
+  background-color: rgba(230, 227, 227, 0.2);
 }
 
 .tes {
@@ -51,6 +51,19 @@ li {
   overflow: hidden;
   outline: none;
   transition: background-color 0.3s ease;
+}
+
+.btn-scroll {
+  background-color: white;
+  box-shadow: 2px 7px 15px rgba(189, 188, 188, 0.479);
+  color: black;
+  cursor: pointer;
+}
+
+.btn-scroll:hover {
+  background-color: rgb(255, 101, 48);
+  box-shadow: 2px 7px 15px rgba(255, 76, 49, 0.479);
+  color: white;
 }
 
 /* Hover effect */
@@ -82,4 +95,8 @@ li {
 
 .home-content {
   @apply w-full pt-[150px] h-[100vh] px-4   lg:px-[100px] lg:pt-[180px];
+}
+
+.about-services {
+  @apply flex flex-col  justify-center items-center lg:flex-row;
 }

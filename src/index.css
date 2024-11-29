@@ -2,12 +2,23 @@
 @tailwind components;
 @tailwind utilities;
 
+::-webkit-scrollbar- {
+  display: none;
+}
+* {
+  scrollbar-width: none;
+}
+
 .color-primary {
   color: rgb(255, 101, 48);
 }
 
 .color-secondary {
   color: rgb(255, 76, 49);
+}
+
+.bg-primary {
+  background-color: rgb(255, 101, 48);
 }
 
 .border-rr {

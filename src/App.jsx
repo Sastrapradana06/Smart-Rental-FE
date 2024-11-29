@@ -5,6 +5,11 @@ import { MdKeyboardArrowRight } from "react-icons/md";
 import NavLanding from "./components/layout/nav-landing";
 import { FaCarSide } from "react-icons/fa";
 import { FaUsersLine } from "react-icons/fa6";
+import { FaCar } from "react-icons/fa";
+import { GiCarDoor } from "react-icons/gi";
+import { MdAirlineSeatReclineExtra } from "react-icons/md";
+import { SiTransmission } from "react-icons/si";
+import { MdPhoneAndroid } from "react-icons/md";
 
 function App() {
   return (
@@ -115,7 +120,7 @@ function App() {
               Quick & easy car rental
             </h1>
           </div>
-          <div className="flex-horizontal gap-12 mt-8 w-[85%] m-auto">
+          <div className="about-services mt-8 w-[85%] m-auto">
             <div className="flex-vertical">
               <img src="/iconbox-image_01.png" alt="Select Car" />
               <h1 className="text-[1.6rem] benner">Select Car</h1>
@@ -124,6 +129,7 @@ function App() {
                 range of available cars.
               </p>
             </div>
+            <div className="w-[80px] border border-dashed border-gray-400 -mt-[130px] hidden lg:block"></div>
             <div className="flex-vertical">
               <img src="/iconbox-image_02.png" alt="Contact Operator" />
               <h1 className="text-[1.6rem] benner">Contact Operator</h1>
@@ -132,6 +138,8 @@ function App() {
                 information about our services.
               </p>
             </div>
+            <div className="w-[80px] border border-dashed border-gray-400 -mt-[130px] hidden lg:block"></div>
+
             <div className="flex-vertical">
               <img src="/iconbox-image_03.png" alt="Let's Drive" />
               <h1 className="text-[1.6rem] benner">Let&apos;s Drive</h1>
@@ -143,9 +151,89 @@ function App() {
           </div>
         </div>
       </section>
-      <section className="w-full h-[300px] mt-8 border-rr"></section>
+      <section className="w-full h-max mt-32">
+        <div className="text-center">
+          <h2 className="text-[1.4rem]">Vehicle Models</h2>
+          <h1 className="text-[2.2rem] lg:text-[2.5rem] benner">
+            Our rental fleet
+          </h1>
+          <p className="max-w-[90%] text-[.9rem] lg:max-w-[550px] text-gray-500 text-center m-auto">
+            To contribute to positive change and achieve our sustainability
+            goals with many extraordinary
+          </p>
+        </div>
+        <div className="w-[86%] h-max  m-auto mt-7 flex-horizontal">
+          <div className="w-full overflow-x-scroll flex items-center  gap-6  p-6  ">
+            {Array.from({ length: 50 }, (_, index) => (
+              <div className="min-w-[170px]" key={index}>
+                <div className="w-[180px] h-[70px] btn-scroll rounded-sm flex-horizontal">
+                  <p>Avanza 2019</p>
+                </div>
+              </div>
+            ))}
+          </div>
+        </div>
+        <div className="relative w-full h-max mt-8 ">
+          <img
+            src="/banner_image.png"
+            alt="banner"
+            className=" w-[600px] h-[400px] object-cover transform scale-x-[-1]"
+          />
+          <div className="w-full  absolute top-0 left-0">
+            <div className="w-[86%] h-[400px] m-auto  flex-horizontal">
+              <img src="/vehicle-1.png" alt="car" />
+              <div className="w-[35%] h-[400px] ">
+                <div className="border-b border-gray-400 pb-4">
+                  <h1 className="text-[1.3rem] benner">
+                    Rp. <span className="benner text-[2rem]">250.000.000</span>
+                  </h1>
+                  <p className="text-[.9rem] text-gray-500 mt-2">
+                    rent per day
+                  </p>
+                </div>
+                <div className="flex flex-col gap-6 mt-6">
+                  <div className="flex-horizontal gap-2 text-gray-500 w-max">
+                    <FaCar size={20} color="black" />
+                    <p>Model:</p>
+                    <p>Sedan</p>
+                  </div>
+                  <div className="flex-horizontal gap-2 text-gray-500 w-max">
+                    <GiCarDoor size={20} color="black" />
+                    <p>Doors:</p>
+                    <p>4</p>
+                  </div>
+                  <div className="flex-horizontal gap-2 text-gray-500 w-max">
+                    <MdAirlineSeatReclineExtra size={20} color="black" />
+                    <p>Seats:</p>
+                    <p>6</p>
+                  </div>
+                  <div className="flex-horizontal gap-2 text-gray-500 w-max">
+                    <SiTransmission size={20} color="black" />
+                    <p>Transmission:</p>
+                    <p>Manual</p>
+                  </div>
+                </div>
+                <div className="flex-horizontal gap-6 mt-7 w-max">
+                  <button className="glow-button w-full lg:w-max">
+                    <div className="w-max flex-horizontal gap-4 m-auto">
+                      <p className="text-[.9rem]">Book Ride</p>
+                      <IoIosCheckmarkCircle size={20} color="white" />
+                    </div>
+                  </button>
+                  <div className="flex-horizontal">
+                    <MdPhoneAndroid size={25} color={"black"} />
+                    <h1 className="text-[1.1rem]">081375875623</h1>
+                    <p>(ryan)</p>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
     </main>
   );
 }
 
 export default App;
+``;

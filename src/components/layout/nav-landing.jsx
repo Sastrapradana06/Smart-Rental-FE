@@ -54,7 +54,7 @@ const NavLanding = () => {
           About
         </Link>
         <Link to="/" className="text-link">
-          Variant Models
+          Vehicle Models
         </Link>
         <Link to="/" className="text-link">
           Contact
