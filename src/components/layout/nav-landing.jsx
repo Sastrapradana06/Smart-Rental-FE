@@ -1,4 +1,3 @@
-import { Link } from "react-router-dom";
 import { Button } from "@mantine/core";
 import { useEffect, useState } from "react";
 import { CgMenuGridR } from "react-icons/cg";
@@ -47,18 +46,18 @@ const NavLanding = () => {
       </>
       <Logo />
       <div className="nav-link gap-6 ">
-        <Link to="/" className="color-primary text-link">
+        <a href="#home" className="color-primary text-link font-semibold">
           Home
-        </Link>
-        <Link to="/" className="text-link">
+        </a>
+        <a href="#about" className="text-link font-semibold">
           About
-        </Link>
-        <Link to="/" className="text-link">
+        </a>
+        <a href="#vehicle" className="text-link font-semibold">
           Vehicle Models
-        </Link>
-        <Link to="/" className="text-link">
+        </a>
+        <a href="#contact" className="text-link font-semibold">
           Contact
-        </Link>
+        </a>
       </div>
       <button className="lg:hidden" onClick={open}>
         <CgMenuGridR size={40} color="rgb(255, 76, 49)" />

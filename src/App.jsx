@@ -10,7 +10,11 @@ import { GiCarDoor } from "react-icons/gi";
 import { MdAirlineSeatReclineExtra } from "react-icons/md";
 import { SiTransmission } from "react-icons/si";
 import { MdPhoneAndroid } from "react-icons/md";
-
+import { GiRotaryPhone } from "react-icons/gi";
+import { MdOutlineMapsHomeWork } from "react-icons/md";
+import { MdOutlineAttachEmail } from "react-icons/md";
+import { TextInput, Textarea } from "@mantine/core";
+import { TbSend } from "react-icons/tb";
 function App() {
   return (
     <main className="">
@@ -24,7 +28,7 @@ function App() {
                 Save <span className="color-primary benner">big</span> with our
                 car rental
               </h1>
-              <p className="mt-3 text-gray-400 text-[.9rem]">
+              <p className="mt-3 text-gray-400 text-[.9rem] font-semibold">
                 To contribute to positive change and achieve our sustainability
                 goals with many extraordinary
               </p>
@@ -151,7 +155,7 @@ function App() {
           </div>
         </div>
       </section>
-      <section className="w-full h-max mt-32">
+      <section className="w-full h-max mt-32" id="vehicle">
         <div className="text-center">
           <h2 className="text-[1.4rem]">Vehicle Models</h2>
           <h1 className="text-[2.2rem] lg:text-[2.5rem] benner">
@@ -164,7 +168,7 @@ function App() {
         </div>
         <div className="w-[86%] h-max  m-auto mt-7 flex-horizontal">
           <div className="w-full overflow-x-scroll flex items-center  gap-6  p-6  ">
-            {Array.from({ length: 50 }, (_, index) => (
+            {Array.from({ length: 10 }, (_, index) => (
               <div className="min-w-[170px]" key={index}>
                 <div className="w-[180px] h-[70px] btn-scroll rounded-sm flex-horizontal">
                   <p>Avanza 2019</p>
@@ -177,10 +181,10 @@ function App() {
           <img
             src="/banner_image.png"
             alt="banner"
-            className=" w-[600px] h-[400px] object-cover transform scale-x-[-1]"
+            className="hidden lg:block w-[600px] h-[400px] object-cover transform scale-x-[-1]"
           />
           <div className="w-full  absolute top-0 left-0">
-            <div className="w-[86%] h-[400px] m-auto  flex-horizontal">
+            <div className="w-[86%] h-[400px] m-auto vehicle-content">
               <img src="/vehicle-1.png" alt="car" />
               <div className="w-[35%] h-[400px] ">
                 <div className="border-b border-gray-400 pb-4">
@@ -213,7 +217,7 @@ function App() {
                     <p>Manual</p>
                   </div>
                 </div>
-                <div className="flex-horizontal gap-6 mt-7 w-max">
+                <div className="flex-horizontal gap-1 mt-7 w-max lg:gap-6 pb-4">
                   <button className="glow-button w-full lg:w-max">
                     <div className="w-max flex-horizontal gap-4 m-auto">
                       <p className="text-[.9rem]">Book Ride</p>
@@ -231,6 +235,79 @@ function App() {
           </div>
         </div>
       </section>
+      <section className="w-full h-max mt-[700px] lg:mt-32 " id="contact">
+        <div className="w-full lg:w-[86%] h-max m-auto px-4  flex flex-col justify-between py-4 lg:flex-row lg:px-0">
+          <div className="w-full lg:w-[35%]">
+            <>
+              <h1 className="benner text-[2.5rem]">Need additional</h1>
+              <h1 className="benner text-[2.5rem] -mt-4">information?</h1>
+            </>
+            <p className="my-8 text-gray-500">
+              A multifaceted professional skilled in multiple fields of
+              research, development as well as a learning specialist. Over 15
+              years of experience.
+            </p>
+            <>
+              <div className="flex items-center gap-4 w-[300px]">
+                <GiRotaryPhone size={22} color="black" />
+                <p>081375875623</p>
+              </div>
+              <div className="flex items-center gap-4 w-[300px]  my-4">
+                <MdOutlineAttachEmail size={22} color="black" />
+                <p>smartrental@gmail.com</p>
+              </div>
+              <div className="flex items-center gap-4 w-[300px] ">
+                <MdOutlineMapsHomeWork size={22} color="black" />
+                <p>Level 1, 121 King Street Melbourne, 3000, Australia</p>
+              </div>
+            </>
+          </div>
+          <div className="w-full mt-8 lg:w-[50%] flex flex-col gap-6 lg:mt-0">
+            <TextInput
+              size="xl"
+              label={
+                <p className="text-[.9rem] font-semibold">
+                  Full Name <span className="text-red-500">*</span>
+                </p>
+              }
+              variant="filled"
+              placeholder="E.G.: John Doe"
+              error=""
+            />
+            <TextInput
+              size="xl"
+              label={
+                <p className="text-[.9rem] font-semibold">
+                  Email Address <span className="text-red-500">*</span>
+                </p>
+              }
+              variant="filled"
+              placeholder="mail@example.com"
+              error=""
+            />
+            <Textarea
+              size="xl"
+              label={
+                <p className="text-[.9rem] font-semibold">
+                  Tell me about it <span className="text-red-500">*</span>
+                </p>
+              }
+              variant="filled"
+              placeholder="write here..."
+              error=""
+              autosize
+              minRows={5}
+            />
+            <button className="glow-button w-max lg:w-max">
+              <div className="w-max flex-horizontal gap-4 m-auto">
+                <TbSend size={20} color="white" />
+                <p className="text-[.9rem]">Send Message</p>
+              </div>
+            </button>
+          </div>
+        </div>
+      </section>
+      <section></section>
     </main>
   );
 }

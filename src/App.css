@@ -24,8 +24,12 @@ p,
 span,
 a,
 li {
-  font-family: "Montserrat", sans-serif; /* Font untuk konten */
-  font-weight: 600; /* Normal untuk teks biasa */
+  font-family: "Poppins", sans-serif; /* Font untuk konten */
+  font-weight: 500; /* Normal untuk teks biasa */
+}
+
+.vehicle-content {
+  @apply flex flex-col lg:flex-row lg:justify-center lg:items-center;
 }
 
 .bg-blur {
