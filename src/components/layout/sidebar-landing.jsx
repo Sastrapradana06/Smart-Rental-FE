@@ -8,7 +8,10 @@ const SidebarLanding = ({ opened, close }) => {
   const LinkList = ({ link, teks }) => {
     return (
       <a href={link}>
-        <p className={`text-link ${hash === link ? "color-primary" : ""}`}>
+        <p
+          className={`text-link ${hash === link ? "color-primary" : ""}`}
+          onClick={close}
+        >
           {teks}
         </p>
       </a>
@@ -38,6 +41,7 @@ const SidebarLanding = ({ opened, close }) => {
       <div className="flex flex-col  gap-5">
         <a href="#home">
           <p
+            onClick={close}
             className={`text-link ${
               hash === "#home" || hash === "" ? "color-primary" : ""
             }`}

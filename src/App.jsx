@@ -1,21 +1,125 @@
 import "./App.css";
-import { Button } from "@mantine/core";
+import { Button, useMantineColorScheme } from "@mantine/core";
 import { IoIosCheckmarkCircle } from "react-icons/io";
-import { MdKeyboardArrowRight } from "react-icons/md";
 import NavLanding from "./components/layout/nav-landing";
-import { FaCarSide } from "react-icons/fa";
+import { FaCarSide, FaFacebookF, FaYoutube, FaCar } from "react-icons/fa";
 import { FaUsersLine } from "react-icons/fa6";
-import { FaCar } from "react-icons/fa";
 import { GiCarDoor } from "react-icons/gi";
-import { MdAirlineSeatReclineExtra } from "react-icons/md";
 import { SiTransmission } from "react-icons/si";
-import { MdPhoneAndroid } from "react-icons/md";
 import { GiRotaryPhone } from "react-icons/gi";
-import { MdOutlineMapsHomeWork } from "react-icons/md";
-import { MdOutlineAttachEmail } from "react-icons/md";
+import {
+  MdOutlineMapsHomeWork,
+  MdOutlineAttachEmail,
+  MdKeyboardArrowRight,
+  MdAirlineSeatReclineExtra,
+  MdPhoneAndroid,
+} from "react-icons/md";
 import { TextInput, Textarea } from "@mantine/core";
 import { TbSend } from "react-icons/tb";
+import { RiInstagramFill } from "react-icons/ri";
+import { useState } from "react";
+
+const dataDummy = [
+  {
+    id: 1,
+    nama_mobil: "Toyota Avanza",
+    image:
+      "https://static.wixstatic.com/media/304dbc_e38bc99264104901b33f72b7e02edefa~mv2.png/v1/fill/w_560,h_336,al_c,q_85,usm_0.66_1.00_0.01,enc_auto/304dbc_e38bc99264104901b33f72b7e02edefa~mv2.png",
+    jenis: "MPV",
+    plat_nomor: "B 1234 AB",
+    transmisi: "Manual",
+    doors: 4,
+    seats: 7,
+    status: "Tersedia",
+    harga_sewa_per_hari: 400000,
+  },
+  {
+    id: 2,
+    nama_mobil: "Honda Brio",
+    image:
+      "https://res.cloudinary.com/mufautoshow/image/upload/f_auto,f_auto/w_1200/v1608086368/moas/news/1599257741_harga-honda-brio-2020-daftar-harga-review-dan-spesifikasi.jpg",
+    jenis: "City Car",
+    plat_nomor: "D 5678 CD",
+    transmisi: "Automatic",
+    doors: 4,
+    seats: 5,
+    status: "Disewa",
+    harga_sewa_per_hari: 300000,
+  },
+  {
+    id: 3,
+    nama_mobil: "Daihatsu Xenia",
+    image:
+      "https://www.seva.id/_next/image?url=https%3A%2F%2Fimages.prod.seva.id%2FDaihatsu%2FAll%20New%20Xenia%2Fmain_color%2Fblack.png&w=640&q=75",
+    jenis: "MPV",
+    plat_nomor: "E 9101 EF",
+    transmisi: "Manual",
+    doors: 4,
+    seats: 7,
+    status: "Tersedia",
+    harga_sewa_per_hari: 380000,
+  },
+  {
+    id: 4,
+    nama_mobil: "Suzuki Ertiga",
+    image:
+      "https://res.cloudinary.com/mufautoshow/image/upload/f_auto,f_auto/w_1200/v1710651432/moas/news/1710651429_suzuki-ertiga-hybrid-cruise-kapasitas-baterai-lebih-besar.png",
+    jenis: "MPV",
+    plat_nomor: "F 2345 GH",
+    transmisi: "Automatic",
+    doors: 4,
+    seats: 7,
+    status: "Disewa",
+    harga_sewa_per_hari: 420000,
+  },
+  {
+    id: 5,
+    nama_mobil: "Mitsubishi Pajero",
+    image:
+      "https://assets.mitsubishi-motors.co.id/compress/articles/1610984997-pajero-sport-dakar-4x2png.webp",
+    jenis: "SUV",
+    plat_nomor: "G 6789 IJ",
+    transmisi: "Manual",
+    doors: 4,
+    seats: 7,
+    status: "Tersedia",
+    harga_sewa_per_hari: 750000,
+  },
+  {
+    id: 6,
+    nama_mobil: "Toyota Innova",
+    image:
+      "https://www.static-src.com/wcsstore/Indraprastha/images/catalog/full/catalog-image/124/MTA-178876969/toyota_toyota_full03.jpg",
+    jenis: "MPV",
+    plat_nomor: "H 1122 KL",
+    transmisi: "Automatic",
+    doors: 4,
+    seats: 7,
+    status: "Tersedia",
+    harga_sewa_per_hari: 500000,
+  },
+];
+
 function App() {
+  const [dataCar] = useState(dataDummy);
+  const [carView, setCarView] = useState(dataDummy[0]);
+  const { colorScheme } = useMantineColorScheme();
+
+  const handleCarView = (index) => {
+    setCarView(dataCar[index]);
+  };
+
+  const handleClickSendWa = (carName) => {
+    const phoneNumber = "083870915417"; // Nomor WhatsApp tujuan
+    const message = encodeURIComponent(
+      "Halo, saya ingin merental mobil " + carName + "."
+    ); // Pesan yang ingin dikirim
+    const whatsappURL = `https://wa.me/${phoneNumber}?text=${message}`;
+    window.open(whatsappURL, "_blank");
+  };
+
+  console.log({ carView });
+
   return (
     <main className="">
       <section className="w-full h-[100vh] bg-[#F8F8F8] relative" id="home">
@@ -23,8 +127,8 @@ function App() {
         <div className="home-content ">
           <div className="w-full lg:w-[40%] h-[400px] ">
             <div className="">
-              <h2 className="text-[1.4rem]">Plan your trip now</h2>
-              <h1 className="text-[2.5rem] lg:text-[3.2rem] benner tracking-[-.1rem]">
+              <h2 className="text-[1.4rem] text-black">Plan your trip now</h2>
+              <h1 className="text-[2.5rem] text-black lg:text-[3.2rem] benner tracking-[-.1rem]">
                 Save <span className="color-primary benner">big</span> with our
                 car rental
               </h1>
@@ -66,7 +170,7 @@ function App() {
           </div>
         </div>
       </section>
-      <section className="w-full h-max mt-5 lg:mt-20" id="about">
+      <section className="w-full h-max mt-32 lg:mt-20" id="about">
         <div className="w-full  h-max m-auto px-4 flex flex-col  justify-between gap-10 lg:px-6 lg:flex-row lg:w-[90%]">
           <img
             src="/about_image.jpg"
@@ -120,7 +224,7 @@ function App() {
         <div className="w-full mt-14">
           <div className="text-center">
             <h2 className="text-[1.4rem]">How It Works</h2>
-            <h1 className="text-[2.2rem] lg:text-[2.5rem] benner">
+            <h1 className="text-[2rem] lg:text-[2.5rem] benner">
               Quick & easy car rental
             </h1>
           </div>
@@ -168,28 +272,45 @@ function App() {
         </div>
         <div className="w-[86%] h-max  m-auto mt-7 flex-horizontal">
           <div className="w-full overflow-x-scroll flex items-center  gap-6  p-6  ">
-            {Array.from({ length: 10 }, (_, index) => (
-              <div className="min-w-[170px]" key={index}>
-                <div className="w-[180px] h-[70px] btn-scroll rounded-sm flex-horizontal">
-                  <p>Avanza 2019</p>
+            {dataCar.map((item, i) => (
+              <button
+                className="min-w-[170px]"
+                key={item.id}
+                onClick={() => handleCarView(i)}
+              >
+                <div
+                  className={`btn-scroll rounded-sm flex-horizontal ${
+                    item.nama_mobil === carView.nama_mobil
+                      ? "bg-[#FF6530] text-white"
+                      : "bg-white text-black"
+                  } `}
+                >
+                  <p>{item.nama_mobil}</p>
                 </div>
-              </div>
+              </button>
             ))}
           </div>
         </div>
-        <div className="relative w-full h-max mt-8 ">
+        <div className=" w-full h-max mt-16 ">
           <img
             src="/banner_image.png"
             alt="banner"
-            className="hidden lg:block w-[600px] h-[400px] object-cover transform scale-x-[-1]"
+            className="hidden  w-[600px] h-[400px] object-cover transform scale-x-[-1]"
           />
-          <div className="w-full  absolute top-0 left-0">
+          <div className="w-full  ">
             <div className="w-[86%] h-[400px] m-auto vehicle-content">
-              <img src="/vehicle-1.png" alt="car" />
+              <img
+                src={carView.image}
+                alt="car"
+                className="w-[800px] h-[550px]"
+              />
               <div className="w-[35%] h-[400px] ">
                 <div className="border-b border-gray-400 pb-4">
                   <h1 className="text-[1.3rem] benner">
-                    Rp. <span className="benner text-[2rem]">250.000.000</span>
+                    Rp.{" "}
+                    <span className="benner text-[2rem]">
+                      {carView.harga_sewa_per_hari.toLocaleString("id-ID")}
+                    </span>
                   </h1>
                   <p className="text-[.9rem] text-gray-500 mt-2">
                     rent per day
@@ -197,35 +318,63 @@ function App() {
                 </div>
                 <div className="flex flex-col gap-6 mt-6">
                   <div className="flex-horizontal gap-2 text-gray-500 w-max">
-                    <FaCar size={20} color="black" />
+                    <FaCar
+                      size={20}
+                      className={`${
+                        colorScheme == "dark" ? "text-gray-300" : "text-black"
+                      }`}
+                    />
                     <p>Model:</p>
-                    <p>Sedan</p>
+                    <p>{carView.jenis}</p>
                   </div>
                   <div className="flex-horizontal gap-2 text-gray-500 w-max">
-                    <GiCarDoor size={20} color="black" />
+                    <GiCarDoor
+                      size={20}
+                      className={`${
+                        colorScheme == "dark" ? "text-gray-300" : "text-black"
+                      }`}
+                    />
                     <p>Doors:</p>
-                    <p>4</p>
+                    <p>{carView.doors}</p>
                   </div>
                   <div className="flex-horizontal gap-2 text-gray-500 w-max">
-                    <MdAirlineSeatReclineExtra size={20} color="black" />
+                    <MdAirlineSeatReclineExtra
+                      size={20}
+                      className={`${
+                        colorScheme == "dark" ? "text-gray-300" : "text-black"
+                      }`}
+                    />
                     <p>Seats:</p>
-                    <p>6</p>
+                    <p>{carView.seats}</p>
                   </div>
                   <div className="flex-horizontal gap-2 text-gray-500 w-max">
-                    <SiTransmission size={20} color="black" />
+                    <SiTransmission
+                      size={20}
+                      className={`${
+                        colorScheme == "dark" ? "text-gray-300" : "text-black"
+                      }`}
+                    />
                     <p>Transmission:</p>
-                    <p>Manual</p>
+                    <p>{carView.transmisi}</p>
                   </div>
                 </div>
                 <div className="flex-horizontal gap-1 mt-7 w-max lg:gap-6 pb-4">
-                  <button className="glow-button w-full lg:w-max">
+                  <button
+                    className="glow-button w-full lg:w-max"
+                    onClick={() => handleClickSendWa(carView.nama_mobil)}
+                  >
                     <div className="w-max flex-horizontal gap-4 m-auto">
                       <p className="text-[.9rem]">Book Ride</p>
                       <IoIosCheckmarkCircle size={20} color="white" />
                     </div>
                   </button>
                   <div className="flex-horizontal">
-                    <MdPhoneAndroid size={25} color={"black"} />
+                    <MdPhoneAndroid
+                      size={25}
+                      className={`${
+                        colorScheme == "dark" ? "text-gray-300" : "text-black"
+                      }`}
+                    />
                     <h1 className="text-[1.1rem]">081375875623</h1>
                     <p>(ryan)</p>
                   </div>
@@ -235,7 +384,7 @@ function App() {
           </div>
         </div>
       </section>
-      <section className="w-full h-max mt-[700px] lg:mt-32 " id="contact">
+      <section className="w-full h-max mt-[450px] lg:mt-32 " id="contact">
         <div className="w-full lg:w-[86%] h-max m-auto px-4  flex flex-col justify-between py-4 lg:flex-row lg:px-0">
           <div className="w-full lg:w-[35%]">
             <>
@@ -249,15 +398,30 @@ function App() {
             </p>
             <>
               <div className="flex items-center gap-4 w-[300px]">
-                <GiRotaryPhone size={22} color="black" />
+                <GiRotaryPhone
+                  size={22}
+                  className={`${
+                    colorScheme == "dark" ? "text-gray-300" : "text-black"
+                  }`}
+                />
                 <p>081375875623</p>
               </div>
               <div className="flex items-center gap-4 w-[300px]  my-4">
-                <MdOutlineAttachEmail size={22} color="black" />
+                <MdOutlineAttachEmail
+                  size={22}
+                  className={`${
+                    colorScheme == "dark" ? "text-gray-300" : "text-black"
+                  }`}
+                />
                 <p>smartrental@gmail.com</p>
               </div>
               <div className="flex items-center gap-4 w-[300px] ">
-                <MdOutlineMapsHomeWork size={22} color="black" />
+                <MdOutlineMapsHomeWork
+                  size={22}
+                  className={`${
+                    colorScheme == "dark" ? "text-gray-300" : "text-black"
+                  }`}
+                />
                 <p>Level 1, 121 King Street Melbourne, 3000, Australia</p>
               </div>
             </>
@@ -307,7 +471,102 @@ function App() {
           </div>
         </div>
       </section>
-      <section></section>
+      <section className="w-full h-max mt-32 " id="contact">
+        <footer className="w-[86%] h-max m-auto ">
+          <div className="flex flex-col  gap-10 lg:flex-row lg:gap-24">
+            <div className="">
+              <p className="text-[1.3rem]">
+                <span className="font-semibold uppercase">Smart</span> Rental
+              </p>
+              <p className="my-8 w-[300px] text-gray-500">
+                Your Journey, Our Priority, Driven by Comfort and Trust, Contact
+                us for a seamless ride!
+              </p>
+              <div className="">
+                <div className="flex items-center gap-4">
+                  <GiRotaryPhone
+                    size={22}
+                    className={`${
+                      colorScheme == "dark" ? "text-gray-300" : "text-black"
+                    }`}
+                  />
+                  <p>081375875623</p>
+                </div>
+                <div className="flex items-center gap-4 mt-4">
+                  <MdOutlineAttachEmail
+                    size={22}
+                    className={`${
+                      colorScheme == "dark" ? "text-gray-300" : "text-black"
+                    }`}
+                  />
+                  <p>smartrental@gmail.com</p>
+                </div>
+              </div>
+            </div>
+            <div className="">
+              <h1 className="uppercase text-[1.3rem]">Company</h1>
+              <div className="mt-8 flex flex-col gap-3">
+                <p>Medan</p>
+                <p>Tebing Tinggi</p>
+                <p>Binjai</p>
+                <p>Siantar</p>
+                <p>Kaban Jahe</p>
+              </div>
+            </div>
+            <div className="">
+              <h1 className="uppercase text-[1.3rem]">Working Hours</h1>
+              <div className="mt-6 flex flex-col gap-3 ">
+                <div className="flex items-center gap-2">
+                  <h1 className="text-gray-500">Mon - Fri:</h1>
+                  <p>09:00 WIB - 17:00 WIB</p>
+                </div>
+                <div className="flex items-center gap-2">
+                  <h1 className="text-gray-500">Sat:</h1>
+                  <p>09:00 WIB - 15:00 WIB</p>
+                </div>
+                <div className="flex items-center gap-2">
+                  <h1 className="text-gray-500">Sun:</h1>
+                  <p>Closed</p>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div className="h-[100px] mt-14 border-t border-gray-300 p-4 ">
+            <div className="flex flex-col justify-center items-center gap-3 lg:flex-row lg:justify-between">
+              <p className="text-[.9rem]">
+                ©2020 <span className="font-semibold">Smart Rental.</span> All
+                Rights Reserved
+              </p>
+              <div className="flex items-center gap-4">
+                <a href="#">
+                  <FaYoutube
+                    size={18}
+                    className={`${
+                      colorScheme == "dark" ? "text-gray-300" : "text-black"
+                    } hover:text-[#FF0000]`}
+                  />
+                </a>
+                <a href="#">
+                  <RiInstagramFill
+                    size={18}
+                    className={`${
+                      colorScheme == "dark" ? "text-gray-300" : "text-black"
+                    } hover:text-[#FF0000]`}
+                  />
+                </a>
+                <a href="#">
+                  <FaFacebookF
+                    size={15}
+                    className={`${
+                      colorScheme == "dark" ? "text-gray-300" : "text-black"
+                    } hover:text-[#FF0000]`}
+                  />
+                </a>
+              </div>
+            </div>
+          </div>
+        </footer>
+      </section>
     </main>
   );
 }

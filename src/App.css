@@ -58,9 +58,9 @@ li {
 }
 
 .btn-scroll {
-  background-color: white;
+  width: 180px;
+  height: 70px;
   box-shadow: 2px 7px 15px rgba(189, 188, 188, 0.479);
-  color: black;
   cursor: pointer;
 }
 
