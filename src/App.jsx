@@ -18,13 +18,13 @@ import { TextInput, Textarea } from "@mantine/core";
 import { TbSend } from "react-icons/tb";
 import { RiInstagramFill } from "react-icons/ri";
 import { useState } from "react";
+import { Link } from "react-router-dom";
 
 const dataDummy = [
   {
     id: 1,
     nama_mobil: "Toyota Avanza",
-    image:
-      "https://static.wixstatic.com/media/304dbc_e38bc99264104901b33f72b7e02edefa~mv2.png/v1/fill/w_560,h_336,al_c,q_85,usm_0.66_1.00_0.01,enc_auto/304dbc_e38bc99264104901b33f72b7e02edefa~mv2.png",
+    image: "/avanza.png",
     jenis: "MPV",
     plat_nomor: "B 1234 AB",
     transmisi: "Manual",
@@ -36,9 +36,7 @@ const dataDummy = [
   {
     id: 2,
     nama_mobil: "Honda Brio",
-    image:
-      "https://res.cloudinary.com/mufautoshow/image/upload/f_auto,f_auto/w_1200/v1608086368/moas/news/1599257741_harga-honda-brio-2020-daftar-harga-review-dan-spesifikasi.jpg",
-    jenis: "City Car",
+    image: "/brio.png",
     plat_nomor: "D 5678 CD",
     transmisi: "Automatic",
     doors: 4,
@@ -49,8 +47,7 @@ const dataDummy = [
   {
     id: 3,
     nama_mobil: "Daihatsu Xenia",
-    image:
-      "https://www.seva.id/_next/image?url=https%3A%2F%2Fimages.prod.seva.id%2FDaihatsu%2FAll%20New%20Xenia%2Fmain_color%2Fblack.png&w=640&q=75",
+    image: "/xenia.png",
     jenis: "MPV",
     plat_nomor: "E 9101 EF",
     transmisi: "Manual",
@@ -62,8 +59,7 @@ const dataDummy = [
   {
     id: 4,
     nama_mobil: "Suzuki Ertiga",
-    image:
-      "https://res.cloudinary.com/mufautoshow/image/upload/f_auto,f_auto/w_1200/v1710651432/moas/news/1710651429_suzuki-ertiga-hybrid-cruise-kapasitas-baterai-lebih-besar.png",
+    image: "/ertiga.png",
     jenis: "MPV",
     plat_nomor: "F 2345 GH",
     transmisi: "Automatic",
@@ -75,8 +71,7 @@ const dataDummy = [
   {
     id: 5,
     nama_mobil: "Mitsubishi Pajero",
-    image:
-      "https://assets.mitsubishi-motors.co.id/compress/articles/1610984997-pajero-sport-dakar-4x2png.webp",
+    image: "/pajero.png",
     jenis: "SUV",
     plat_nomor: "G 6789 IJ",
     transmisi: "Manual",
@@ -88,8 +83,7 @@ const dataDummy = [
   {
     id: 6,
     nama_mobil: "Toyota Innova",
-    image:
-      "https://www.static-src.com/wcsstore/Indraprastha/images/catalog/full/catalog-image/124/MTA-178876969/toyota_toyota_full03.jpg",
+    image: "/inova.png",
     jenis: "MPV",
     plat_nomor: "H 1122 KL",
     transmisi: "Automatic",
@@ -155,7 +149,11 @@ function App() {
                   rightSection={
                     <MdKeyboardArrowRight size={20} color="black" />
                   }
-                  leftSection={<p className="text-[.9rem] ml-2">Learn More</p>}
+                  leftSection={
+                    <a href="#about" className="text-[.9rem] ml-2">
+                      Learn More
+                    </a>
+                  }
                 ></Button>
               </div>
             </div>
@@ -384,7 +382,7 @@ function App() {
           </div>
         </div>
       </section>
-      <section className="w-full h-max mt-[450px] lg:mt-32 " id="contact">
+      <section className="w-full h-max mt-[300px] lg:mt-32 " id="contact">
         <div className="w-full lg:w-[86%] h-max m-auto px-4  flex flex-col justify-between py-4 lg:flex-row lg:px-0">
           <div className="w-full lg:w-[35%]">
             <>
@@ -538,30 +536,37 @@ function App() {
                 Rights Reserved
               </p>
               <div className="flex items-center gap-4">
-                <a href="#">
-                  <FaYoutube
-                    size={18}
-                    className={`${
-                      colorScheme == "dark" ? "text-gray-300" : "text-black"
-                    } hover:text-[#FF0000]`}
-                  />
-                </a>
-                <a href="#">
-                  <RiInstagramFill
-                    size={18}
-                    className={`${
-                      colorScheme == "dark" ? "text-gray-300" : "text-black"
-                    } hover:text-[#FF0000]`}
-                  />
-                </a>
-                <a href="#">
-                  <FaFacebookF
-                    size={15}
-                    className={`${
-                      colorScheme == "dark" ? "text-gray-300" : "text-black"
-                    } hover:text-[#FF0000]`}
-                  />
-                </a>
+                <button className="glow-button">
+                  <Link to={"/login"} target="_blank">
+                    Try to dashboard
+                  </Link>
+                </button>
+                <div className="flex items-center gap-4">
+                  <a href="#">
+                    <FaYoutube
+                      size={18}
+                      className={`${
+                        colorScheme == "dark" ? "text-gray-300" : "text-black"
+                      } hover:text-[#FF0000]`}
+                    />
+                  </a>
+                  <a href="#">
+                    <RiInstagramFill
+                      size={18}
+                      className={`${
+                        colorScheme == "dark" ? "text-gray-300" : "text-black"
+                      } hover:text-[#FF0000]`}
+                    />
+                  </a>
+                  <a href="#">
+                    <FaFacebookF
+                      size={15}
+                      className={`${
+                        colorScheme == "dark" ? "text-gray-300" : "text-black"
+                      } hover:text-[#FF0000]`}
+                    />
+                  </a>
+                </div>
               </div>
             </div>
           </div>

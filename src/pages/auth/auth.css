@@ -1,0 +1,39 @@
+.login-container {
+  width: 100%;
+  height: 100vh;
+  border: 1px solid black;
+  background-image: url("/bg-login1.jpg");
+  background-size: cover; /* Memastikan gambar memenuhi seluruh elemen */
+  background-position: center; /* Memusatkan gambar */
+  background-repeat: no-repeat; /* Mencegah pengulangan gambar */
+}
+
+.login-container::after {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.267);
+  z-index: 1;
+}
+
+.card-login {
+  width: 100%;
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 10;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.bg-blur-black {
+  background-color: rgba(8, 8, 8, 0.548);
+  border-radius: 5px;
+  backdrop-filter: blur(5px);
+}

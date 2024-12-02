@@ -1,9 +1,20 @@
 /* eslint-disable react/prop-types */
 import { useLocation } from "react-router-dom";
-import { Drawer } from "@mantine/core";
+import {
+  Drawer,
+  useComputedColorScheme,
+  useMantineColorScheme,
+} from "@mantine/core";
+import { MdOutlineLightMode, MdLightMode } from "react-icons/md";
 
 const SidebarLanding = ({ opened, close }) => {
   const { hash } = useLocation();
+  const { colorScheme, setColorScheme } = useMantineColorScheme();
+  const computedColorScheme = useComputedColorScheme("light");
+
+  const toggleColorScheme = () => {
+    setColorScheme(computedColorScheme === "dark" ? "light" : "dark");
+  };
 
   const LinkList = ({ link, teks }) => {
     return (
@@ -52,6 +63,13 @@ const SidebarLanding = ({ opened, close }) => {
         <LinkList link="#about" teks="About" />
         <LinkList link="#vehicle" teks="Vehicle Models" />
         <LinkList link="#contact" teks="Contact" />
+        <button onClick={toggleColorScheme}>
+          {colorScheme === "dark" ? (
+            <MdOutlineLightMode size={25} color="white" />
+          ) : (
+            <MdLightMode size={25} className="text-cyan-600" />
+          )}
+        </button>
       </div>
     </Drawer>
   );

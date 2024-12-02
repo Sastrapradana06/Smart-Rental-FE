@@ -1,33 +1,3 @@
-@import url("https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600&family=Nunito:wght@400;700&family=Poppins:wght@400;600;700;800;900&display=swap");
-
-body {
-  font-family: "Montserrat", sans-serif;
-  font-weight: 500;
-}
-
-h1,
-h2,
-h3,
-h4,
-h5,
-h6 {
-  font-family: "Poppins", sans-serif; /* Font untuk header */
-  font-weight: 600; /* Tebal untuk judul */
-}
-
-.benner {
-  font-family: "Poppins", sans-serif; /* Font untuk header */
-  font-weight: 700;
-}
-
-p,
-span,
-a,
-li {
-  font-family: "Poppins", sans-serif; /* Font untuk konten */
-  font-weight: 500; /* Normal untuk teks biasa */
-}
-
 .vehicle-content {
   @apply flex flex-col lg:flex-row lg:justify-center lg:items-center;
 }
