@@ -6,12 +6,12 @@ import { FaLock } from "react-icons/fa6";
 import { IoEyeSharp } from "react-icons/io5";
 import { FaEyeSlash } from "react-icons/fa";
 import { useState } from "react";
+import { Formik, Form } from "formik";
+import * as Yup from "yup";
+
 export default function Login() {
   const [isShowPw, setIsShowPw] = useState(false);
-  const [errorInput, setErrorInput] = useState({
-    email: "",
-    password: "",
-  });
+
   const BtnEyes = () => {
     return (
       <button className="cursor-pointer" onClick={() => setIsShowPw(!isShowPw)}>
@@ -24,23 +24,17 @@ export default function Login() {
     return <p className="mt-1 text-red-500 text-[.9rem]">{message}</p>;
   };
 
-  const handleSubmit = () => {
-    setErrorInput({
-      email: "",
-      password: "",
-    });
-    if (!errorInput.email) {
-      setErrorInput({
-        ...errorInput,
-        email: "Email is required",
-      });
-    }
-    if (!errorInput.password) {
-      setErrorInput({
-        ...errorInput,
-        password: "Password is required",
-      });
-    }
+  const LoginSchema = Yup.object().shape({
+    email: Yup.string()
+      .email("Email tidak valid")
+      .required("Email harus diisi"),
+    password: Yup.string()
+      .min(6, "Password minimal 6 karakter")
+      .required("Password harus diisi"),
+  });
+
+  const handleSubmit = (values) => {
+    console.log("Form Values:", values);
   };
 
   return (
@@ -53,45 +47,67 @@ export default function Login() {
           <p className="text-center text-sm text-gray-300 mt-1">
             Access your account to continue.
           </p>
-          <div className="w-full flex flex-col gap-8 mt-10 mb-10">
-            <div className="">
-              <Input
-                type="email"
-                placeholder="Email Address"
-                size="lg"
-                variant="filled"
-                radius={"md"}
-                error={errorInput.email}
-                leftSection={<MdEmail size={20} />}
-              />
-              {errorInput.email && <TextError message={errorInput.email} />}
-            </div>
-            <div className="">
-              <Input
-                type={isShowPw ? "text" : "password"}
-                placeholder="Password"
-                size="lg"
-                variant="filled"
-                radius={"md"}
-                rightSectionPointerEvents="all"
-                error={errorInput.password}
-                leftSection={<FaLock size={20} />}
-                rightSection={<BtnEyes />}
-              />
-              {errorInput.password && (
-                <TextError message={errorInput.password} />
-              )}
-            </div>
-          </div>
-          <Button
-            size="lg"
-            radius={"md"}
-            fullWidth
-            color="red"
-            onClick={handleSubmit}
+          <Formik
+            initialValues={{ email: "", password: "" }}
+            validationSchema={LoginSchema}
+            onSubmit={(values) => {
+              handleSubmit(values);
+            }}
           >
-            Submit
-          </Button>
+            {({ errors, values, touched, handleChange }) => (
+              <Form>
+                {console.log(touched)}
+                <div className="w-full flex flex-col gap-8 mt-10 mb-10">
+                  <div className="">
+                    <Input
+                      name="email"
+                      type="email"
+                      placeholder="Email Address"
+                      size="lg"
+                      variant="filled"
+                      radius={"md"}
+                      error={touched.email && errors.email}
+                      value={values.email}
+                      onChange={handleChange}
+                      leftSection={<MdEmail size={20} />}
+                    />
+                    {touched.email && errors.email && (
+                      <TextError message={errors.email} />
+                    )}
+                  </div>
+                  <div className="">
+                    <Input
+                      name="password"
+                      type={isShowPw ? "text" : "password"}
+                      placeholder="Password"
+                      size="lg"
+                      variant="filled"
+                      radius={"md"}
+                      rightSectionPointerEvents="all"
+                      error={touched.password && errors.password}
+                      value={values.password}
+                      onChange={handleChange}
+                      leftSection={<FaLock size={20} />}
+                      rightSection={<BtnEyes />}
+                    />
+                    {touched.password && errors.password && (
+                      <TextError message={errors.password} />
+                    )}
+                  </div>
+                </div>
+                <Button
+                  size="lg"
+                  radius={"md"}
+                  fullWidth
+                  color="red"
+                  type="submit"
+                  // disabled={isSubmitting}
+                >
+                  Submit
+                </Button>
+              </Form>
+            )}
+          </Formik>
         </main>
       </section>
     </main>
