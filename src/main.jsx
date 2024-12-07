@@ -6,6 +6,7 @@ import App from "./App.jsx";
 import "@mantine/core/styles.css";
 import { MantineProvider } from "@mantine/core";
 import Login from "./pages/auth/login.jsx";
+import Dashboard from "./pages/dashboard/index.jsx";
 const theme = {
   fontFamily: "", // Menggunakan font Nunito
 };
@@ -17,6 +18,8 @@ createRoot(document.getElementById("root")).render(
         <Routes>
           <Route path="/" element={<App />} />
           <Route path="/login" element={<Login />} />
+
+          <Route path="/dashboard" element={<Dashboard />} />
         </Routes>
       </BrowserRouter>
     </StrictMode>

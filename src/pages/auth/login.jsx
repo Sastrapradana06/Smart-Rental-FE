@@ -1,28 +1,18 @@
-/* eslint-disable react/prop-types */
 import "./auth.css";
 import { Button, Input } from "@mantine/core";
 import { MdEmail } from "react-icons/md";
 import { FaLock } from "react-icons/fa6";
-import { IoEyeSharp } from "react-icons/io5";
-import { FaEyeSlash } from "react-icons/fa";
 import { useState } from "react";
 import { Formik, Form } from "formik";
 import * as Yup from "yup";
-
+import TextErrorInput from "../../components/ui/text-error-input";
+import BtnEyesInput from "../../components/ui/btn-eyes-input";
+import { Alert, useHandleAlert } from "sstra-alert";
+import { useNavigate } from "react-router-dom";
 export default function Login() {
   const [isShowPw, setIsShowPw] = useState(false);
-
-  const BtnEyes = () => {
-    return (
-      <button className="cursor-pointer" onClick={() => setIsShowPw(!isShowPw)}>
-        {isShowPw ? <FaEyeSlash size={25} /> : <IoEyeSharp size={25} />}
-      </button>
-    );
-  };
-
-  const TextError = ({ message }) => {
-    return <p className="mt-1 text-red-500 text-[.9rem]">{message}</p>;
-  };
+  const { status, data, handleAlert } = useHandleAlert();
+  const navigate = useNavigate();
 
   const LoginSchema = Yup.object().shape({
     email: Yup.string()
@@ -35,10 +25,20 @@ export default function Login() {
 
   const handleSubmit = (values) => {
     console.log("Form Values:", values);
+    handleAlert("success", "Login Berhasil");
+    setTimeout(() => {
+      navigate("/dashboard");
+    }, 3000);
   };
 
   return (
     <main className="login-container flex justify-center items-center">
+      <Alert
+        status={status}
+        type={data.type}
+        message={data.message}
+        background={"bg-white"}
+      />
       <section className="card-login">
         <main className="w-[450px] h-max text-white py-10 px-8 bg-blur-black">
           <h1 className="text-center benner text-[2rem] tracking-widest">
@@ -56,7 +56,6 @@ export default function Login() {
           >
             {({ errors, values, touched, handleChange }) => (
               <Form>
-                {console.log(touched)}
                 <div className="w-full flex flex-col gap-8 mt-10 mb-10">
                   <div className="">
                     <Input
@@ -72,7 +71,7 @@ export default function Login() {
                       leftSection={<MdEmail size={20} />}
                     />
                     {touched.email && errors.email && (
-                      <TextError message={errors.email} />
+                      <TextErrorInput message={errors.email} />
                     )}
                   </div>
                   <div className="">
@@ -88,10 +87,12 @@ export default function Login() {
                       value={values.password}
                       onChange={handleChange}
                       leftSection={<FaLock size={20} />}
-                      rightSection={<BtnEyes />}
+                      rightSection={
+                        <BtnEyesInput state={isShowPw} setState={setIsShowPw} />
+                      }
                     />
                     {touched.password && errors.password && (
-                      <TextError message={errors.password} />
+                      <TextErrorInput message={errors.password} />
                     )}
                   </div>
                 </div>
