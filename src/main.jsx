@@ -4,6 +4,7 @@ import { BrowserRouter, Routes, Route } from "react-router-dom";
 import "./index.css";
 import App from "./App.jsx";
 import "@mantine/core/styles.css";
+import "@mantine/charts/styles.css";
 import { MantineProvider } from "@mantine/core";
 import Login from "./pages/auth/login.jsx";
 import Dashboard from "./pages/dashboard/index.jsx";

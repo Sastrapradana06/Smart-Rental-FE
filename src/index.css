@@ -31,13 +31,13 @@ li {
   font-weight: 500; /* Normal untuk teks biasa */
 }
 
-::-webkit-scrollbar- {
+/* ::-webkit-scrollbar- {
   display: none;
 }
 * {
   scrollbar-width: none;
   scroll-behavior: smooth;
-}
+} */
 
 .color-primary {
   color: rgb(255, 101, 48);
