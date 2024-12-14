@@ -4,7 +4,9 @@ import { IoSearchOutline } from "react-icons/io5";
 import { CiEdit } from "react-icons/ci";
 import { MdOutlineDeleteOutline } from "react-icons/md";
 import { MdOutlineAddCircle } from "react-icons/md";
-
+import { Pagination } from "@mantine/core";
+import { useState } from "react";
+import { Link } from "react-router-dom";
 const dataDummy = [
   {
     unit: "Toyota Avanza",
@@ -24,11 +26,12 @@ const dataDummy = [
   },
 ];
 export default function Unit() {
+  const [activePage, setPage] = useState(1);
   const TableData = () => {
     return (
       <div className="relative overflow-x-auto mt-2">
-        <table className="w-full text-sm text-left border rtl:text-right text-gray-500 dark:text-gray-400">
-          <thead className="text-xs bg-zinc-100 text-black">
+        <table className="w-full text-sm text-left border rtl:text-right text-gray-500 dark:text-gray-400 min-h-max max-h-[400px]">
+          <thead className="text-[.9rem] bg-zinc-100 text-black">
             <tr>
               <th scope="col" className="p-4">
                 <div className="flex items-center">
@@ -86,7 +89,7 @@ export default function Unit() {
                     </label>
                   </div>
                 </td>
-                <th scope="row" className="px-6 py-4 ">
+                <th scope="row" className="px-6 py-4 capitalize">
                   {item.unit}
                 </th>
                 <td className="px-6 py-4">{item.no_plat}</td>
@@ -97,10 +100,10 @@ export default function Unit() {
                   RP. {item.harga.toLocaleString("id-ID")}
                 </td>
                 <td className="flex items-center px-6 py-4 gap-3">
-                  <button>
+                  <button title="edit">
                     <CiEdit size={20} className="text-green-500" />
                   </button>
-                  <button>
+                  <button title="delete">
                     <MdOutlineDeleteOutline
                       size={20}
                       className="text-red-500"
@@ -122,9 +125,9 @@ export default function Unit() {
         <div className="w-full mt-6 bg-white rounded-md ">
           <div className="w-full flex items-center justify-between  p-3">
             <div className="flex items-center gap-3">
-              <button>
+              <Link to={"/unit/add"}>
                 <MdOutlineAddCircle size={30} className="text-green-500" />
-              </button>
+              </Link>
             </div>
             <div className="w-[30%]">
               <TextInput
@@ -136,6 +139,13 @@ export default function Unit() {
             </div>
           </div>
           <TableData />
+        </div>
+        <div className="w-max mt-6 m-auto border-bb">
+          <Pagination
+            total={dataDummy.length}
+            value={activePage}
+            onChange={setPage}
+          />
         </div>
       </section>
     </AppShell>

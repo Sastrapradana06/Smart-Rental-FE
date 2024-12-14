@@ -9,6 +9,7 @@ import { MantineProvider } from "@mantine/core";
 import Login from "./pages/auth/login.jsx";
 import Dashboard from "./pages/dashboard/index.jsx";
 import Unit from "./pages/unit/index.jsx";
+import AddUnit from "./pages/unit/add.jsx";
 const theme = {
   fontFamily: "", // Menggunakan font Nunito
 };
@@ -23,6 +24,7 @@ createRoot(document.getElementById("root")).render(
 
           <Route path="/dashboard" element={<Dashboard />} />
           <Route path="/unit" element={<Unit />} />
+          <Route path="/unit/add" element={<AddUnit />} />
         </Routes>
       </BrowserRouter>
     </StrictMode>
