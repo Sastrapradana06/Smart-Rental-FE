@@ -11,6 +11,7 @@ import { Drawer } from "@mantine/core";
 import { GoShieldLock } from "react-icons/go";
 export default function SidebarDashboard({ opened, close }) {
   const { pathname } = useLocation();
+
   const modules = [
     {
       title: "Dashboard",
@@ -50,13 +51,13 @@ export default function SidebarDashboard({ opened, close }) {
       <Link
         to={link}
         className={`w-full flex items-center gap-3  p-2 rounded-md cursor-pointer hover:bg-zinc-200 duration-200 ${
-          pathname === link ? "bg-zinc-200 text-violet-500" : ""
+          pathname.includes(link) ? "bg-zinc-200 text-violet-500" : ""
         }`}
       >
         <Icons
           size={20}
           className={`${
-            pathname === link ? " text-violet-500" : "text-gray-500"
+            pathname.includes(link) ? " text-violet-500" : "text-gray-500"
           }`}
         />
         <p className="font-semibold text-[.9rem]">{teks}</p>

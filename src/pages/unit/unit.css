@@ -5,3 +5,7 @@
 .input-group {
   @apply w-full flex flex-col gap-3 lg:flex-row justify-between;
 }
+
+.vehicle-content {
+  @apply flex flex-col lg:flex-row lg:justify-center lg:items-center;
+}

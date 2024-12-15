@@ -45,8 +45,7 @@ export default function AddUnit() {
                 className="w-full lg:w-[50%]"
               />
               <TextInput
-                label="Harga sewa"
-                leftSection="Rp."
+                label="Tahun unit"
                 required
                 withAsterisk
                 placeholder=""
@@ -101,7 +100,8 @@ export default function AddUnit() {
             </div>
             <div className="input-group">
               <TextInput
-                label="Tahun unit"
+                label="Harga sewa"
+                leftSection="Rp."
                 required
                 withAsterisk
                 placeholder=""

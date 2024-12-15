@@ -1,14 +1,14 @@
 import AppShell from "../../components/template/app-shell";
 import { TextInput } from "@mantine/core";
-import { IoSearchOutline } from "react-icons/io5";
+import { IoSearchOutline, IoArrowRedoSharp } from "react-icons/io5";
 import { CiEdit } from "react-icons/ci";
-import { MdOutlineDeleteOutline } from "react-icons/md";
 import { MdOutlineAddCircle } from "react-icons/md";
 import { Pagination } from "@mantine/core";
 import { useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 const dataDummy = [
   {
+    id: 1,
     unit: "Toyota Avanza",
     no_plat: "B 1234 AB",
     quantity: 10,
@@ -17,6 +17,7 @@ const dataDummy = [
     harga: 400000,
   },
   {
+    id: 2,
     unit: "Kijang Innova",
     no_plat: "B 1234 AB",
     quantity: 7,
@@ -27,6 +28,12 @@ const dataDummy = [
 ];
 export default function Unit() {
   const [activePage, setPage] = useState(1);
+
+  const navigate = useNavigate();
+
+  const handleNavigateUnit = (id) => {
+    navigate(`/unit/${id}`);
+  };
   const TableData = () => {
     return (
       <div className="relative overflow-x-auto mt-2">
@@ -48,7 +55,7 @@ export default function Unit() {
               <th scope="col" className="px-6 py-3">
                 Unit
               </th>
-              <th scope="col" className="px-6 py-3">
+              <th scope="col" className="px-12 lg:px-6  py-3">
                 No Plat
               </th>
               <th scope="col" className="px-6 py-3">
@@ -71,7 +78,7 @@ export default function Unit() {
           <tbody>
             {dataDummy.map((item, index) => (
               <tr
-                className="bg-white border-b bg-transparent text-zinc-700 "
+                className="bg-white border-b bg-transparent text-zinc-700 hover:bg-zinc-100 duration-150 cursor-pointer"
                 key={index}
               >
                 <td className="w-4 p-4">
@@ -103,11 +110,11 @@ export default function Unit() {
                   <button title="edit">
                     <CiEdit size={20} className="text-green-500" />
                   </button>
-                  <button title="delete">
-                    <MdOutlineDeleteOutline
-                      size={20}
-                      className="text-red-500"
-                    />
+                  <button
+                    title="detail unit"
+                    onClick={() => handleNavigateUnit(item.id)}
+                  >
+                    <IoArrowRedoSharp size={20} className="text-yellow-500" />
                   </button>
                 </td>
               </tr>
