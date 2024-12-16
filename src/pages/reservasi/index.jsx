@@ -6,7 +6,7 @@ import { MdOutlineAddCircle } from "react-icons/md";
 import { Link, useSearchParams } from "react-router-dom";
 import { formatDate } from "../../utils";
 import { useEffect, useState } from "react";
-
+import { IoMdCheckboxOutline } from "react-icons/io";
 const reservationsData = [
   {
     id: 1,
@@ -40,16 +40,6 @@ const reservationsData = [
   },
   {
     id: 4,
-    customerName: "Anisa Rahma",
-    carName: "Daihatsu Xenia",
-    licensePlate: "F 1112 GHI",
-    startDate: "2024-12-06",
-    endDate: "2024-12-08",
-    status: "Dibatalkan",
-    totalPrice: 0,
-  },
-  {
-    id: 5,
     customerName: "Siti Aisyah",
     carName: "Mitsubishi Pajero",
     licensePlate: "B 1314 JKL",
@@ -59,7 +49,7 @@ const reservationsData = [
     totalPrice: 2500000,
   },
   {
-    id: 6,
+    id: 5,
     customerName: "Eko Nugroho",
     carName: "Toyota Fortuner",
     licensePlate: "L 5678 MNO",
@@ -69,7 +59,7 @@ const reservationsData = [
     totalPrice: 3000000,
   },
   {
-    id: 7,
+    id: 6,
     customerName: "Linda Wijaya",
     carName: "Nissan Livina",
     licensePlate: "H 7890 PQR",
@@ -78,18 +68,9 @@ const reservationsData = [
     status: "Aktif",
     totalPrice: 1700000,
   },
+
   {
-    id: 8,
-    customerName: "Asep Suhendar",
-    carName: "Honda HR-V",
-    licensePlate: "B 2024 STU",
-    startDate: "2024-12-08",
-    endDate: "2024-12-10",
-    status: "Dibatalkan",
-    totalPrice: 0,
-  },
-  {
-    id: 9,
+    id: 7,
     customerName: "Tina Marlina",
     carName: "Kia Seltos",
     licensePlate: "E 3456 VWX",
@@ -99,7 +80,7 @@ const reservationsData = [
     totalPrice: 2200000,
   },
   {
-    id: 10,
+    id: 8,
     customerName: "Andri Kurniawan",
     carName: "Hyundai Creta",
     licensePlate: "A 6789 YZA",
@@ -203,11 +184,15 @@ export default function Reservasi() {
                   {item.id}
                 </th>
                 <td className="px-6 py-4">
-                  <p className="w-max font-semibold capitalize">
+                  <p className="w-max font-semibold capitalize text-black">
                     {item.customerName}
                   </p>
                 </td>
-                <td className="px-6 py-4">{item.carName}</td>
+                <td className="px-6 py-4">
+                  <p className="w-max font-semibold capitalize">
+                    {item.carName}
+                  </p>
+                </td>
                 <td className="px-6 py-4">
                   <p className="w-max font-semibold capitalize">
                     {item.licensePlate}
@@ -221,7 +206,9 @@ export default function Reservasi() {
                 <td className="px-6 py-4">
                   <p
                     className={`${
-                      item.status === "Aktif" ? "bg-green-500" : "bg-blue-500"
+                      item.status === "Aktif"
+                        ? "bg-green-500 animate-pulse"
+                        : "bg-blue-500"
                     } p-2  text-white w-[80px] text-center text-[.9rem] rounded-lg`}
                   >
                     {item.status}
@@ -231,7 +218,10 @@ export default function Reservasi() {
                 <td className="px-6 py-4 ">
                   <div className="w-full h-full flex items-center justify-center gap-3 ">
                     <button title="edit">
-                      <CiEdit size={20} className="text-green-500" />
+                      <CiEdit size={23} className="text-green-500" />
+                    </button>
+                    <button title="selesai">
+                      <IoMdCheckboxOutline size={23} className="text-sky-500" />
                     </button>
                   </div>
                 </td>
@@ -250,7 +240,7 @@ export default function Reservasi() {
         <div className="w-full mt-6 bg-white rounded-md ">
           <div className="w-full flex items-center justify-between  p-3">
             <div className="flex items-center gap-3">
-              <Link to={"/unit/add"}>
+              <Link to={"/reservasi/create"}>
                 <MdOutlineAddCircle size={30} className="text-green-500" />
               </Link>
             </div>
@@ -267,7 +257,7 @@ export default function Reservasi() {
         </div>
         <div className="w-max mt-6 m-auto border-bb">
           <Pagination
-            total={reservationsData.length / 5}
+            total={Math.ceil(reservationsData.length / 5)}
             value={activePage}
             onChange={(e) => handlePageChange(e)}
           />

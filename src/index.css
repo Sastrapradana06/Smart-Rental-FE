@@ -79,3 +79,7 @@ li {
   color: rgb(255, 101, 48);
   transition: all 0.2s ease-in-out;
 }
+
+.input-group {
+  @apply w-full flex flex-col gap-3 lg:flex-row justify-between;
+}
