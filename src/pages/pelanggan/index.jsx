@@ -1,102 +1,102 @@
-import AppShell from "../../components/template/app-shell";
-import { Pagination } from "@mantine/core";
-import { CiEdit } from "react-icons/ci";
-import { MdOutlineAddCircle } from "react-icons/md";
 import { Link, useSearchParams } from "react-router-dom";
-import { formatDate } from "../../utils";
-import { useEffect, useState } from "react";
-import { IoMdCheckboxOutline } from "react-icons/io";
+import AppShell from "../../components/template/app-shell";
+import { MdOutlineAddCircle } from "react-icons/md";
 import InputSearch from "../../components/ui/input-search";
-const reservationsData = [
+import { CiEdit } from "react-icons/ci";
+import { formatDate } from "../../utils";
+import { FcBusinessman, FcBusinesswoman } from "react-icons/fc";
+import { Pagination } from "@mantine/core";
+import { useEffect, useState } from "react";
+const dataPelanggan = [
   {
-    id: 1,
-    customerName: "Budi Santoso",
-    carName: "Toyota Avanza",
-    licensePlate: "B 1234 XYZ",
-    startDate: "2024-12-01",
-    endDate: "2024-12-03",
+    id: "CUST001",
+    jekel: "laki-laki",
+    name: "Budi Santoso",
+    email: "budi.santoso@gmail.com",
+    phone: "0812-3456-7890",
+    address: "Jl. Merdeka No. 45, Jakarta",
+    idNumber: "1234567890123456",
+    joinDate: "2024-01-15",
+    totalReservations: 5,
     status: "Aktif",
-    totalPrice: 1500000,
+    notes: "Pelanggan VIP",
   },
   {
-    id: 2,
-    customerName: "Rina Andini",
-    carName: "Honda Brio",
-    licensePlate: "D 5678 ABC",
-    startDate: "2024-12-02",
-    endDate: "2024-12-05",
-    status: "Selesai",
-    totalPrice: 2000000,
-  },
-  {
-    id: 3,
-    customerName: "Doni Saputra",
-    carName: "Suzuki Ertiga",
-    licensePlate: "B 9101 DEF",
-    startDate: "2024-12-05",
-    endDate: "2024-12-07",
+    id: "CUST002",
+    jekel: "perempuan",
+    name: "Rina Andini",
+    email: "rina.andini@gmail.com",
+    phone: "0857-1234-5678",
+    address: "Jl. Sudirman No. 10, Bogor",
+    idNumber: "9876543210987654",
+    joinDate: "2023-11-12",
+    totalReservations: 3,
     status: "Aktif",
-    totalPrice: 1800000,
+    notes: "",
   },
   {
-    id: 4,
-    customerName: "Siti Aisyah",
-    carName: "Mitsubishi Pajero",
-    licensePlate: "B 1314 JKL",
-    startDate: "2024-12-07",
-    endDate: "2024-12-09",
+    id: "CUST003",
+    jekel: "laki-laki",
+    name: "Doni Saputra",
+    email: "doni.saputra@gmail.com",
+    phone: "0813-9876-5432",
+    address: "Jl. Gajah Mada No. 3, Bandung",
+    idNumber: "5678901234567890",
+    joinDate: "2022-05-20",
+    totalReservations: 10,
+    status: "Nonaktif",
+    notes: "Diblacklist karena pelanggaran",
+  },
+  {
+    id: "CUST004",
+    jekel: "perempuan",
+    name: "Anisa Rahma",
+    email: "anisa.rahma@gmail.com",
+    phone: "0821-1234-9876",
+    address: "Jl. Diponegoro No. 17, Surabaya",
+    idNumber: "3456789012345678",
+    joinDate: "2023-08-30",
+    totalReservations: 7,
     status: "Aktif",
-    totalPrice: 2500000,
+    notes: "",
   },
   {
-    id: 5,
-    customerName: "Eko Nugroho",
-    carName: "Toyota Fortuner",
-    licensePlate: "L 5678 MNO",
-    startDate: "2024-12-03",
-    endDate: "2024-12-05",
-    status: "Selesai",
-    totalPrice: 3000000,
-  },
-  {
-    id: 6,
-    customerName: "Linda Wijaya",
-    carName: "Nissan Livina",
-    licensePlate: "H 7890 PQR",
-    startDate: "2024-12-10",
-    endDate: "2024-12-12",
+    id: "CUST005",
+    jekel: "perempuan",
+    name: "Siti Aisyah",
+    email: "siti.aisyah@gmail.com",
+    phone: "0812-7890-1234",
+    address: "Jl. Ahmad Yani No. 25, Medan",
+    idNumber: "2345678901234567",
+    joinDate: "2024-03-10",
+    totalReservations: 2,
     status: "Aktif",
-    totalPrice: 1700000,
-  },
-
-  {
-    id: 7,
-    customerName: "Tina Marlina",
-    carName: "Kia Seltos",
-    licensePlate: "E 3456 VWX",
-    startDate: "2024-12-09",
-    endDate: "2024-12-11",
-    status: "Aktif",
-    totalPrice: 2200000,
+    notes: "",
   },
   {
-    id: 8,
-    customerName: "Andri Kurniawan",
-    carName: "Hyundai Creta",
-    licensePlate: "A 6789 YZA",
-    startDate: "2024-12-11",
-    endDate: "2024-12-13",
+    id: "CUST006",
+    jekel: "laki-laki",
+    name: "Andri Kurniawan",
+    email: "andri.kurniawan@gmail.com",
+    phone: "0838-5678-9012",
+    address: "Jl. Imam Bonjol No. 12, Yogyakarta",
+    idNumber: "6789012345678901",
+    joinDate: "2023-06-25",
+    totalReservations: 8,
     status: "Aktif",
-    totalPrice: 2400000,
+    notes: "Pelanggan loyal",
   },
 ];
 
-export default function Reservasi() {
+export default function Pelanggan() {
+  const [data, setData] = useState([]);
   const [activePage, setPage] = useState(1);
-  const [data, setData] = useState();
 
   const [searchParams, setSearchParams] = useSearchParams();
   const page = searchParams.get("page") || 1;
+  const search = searchParams.get("search") || null;
+
+  console.log({ search });
 
   const handlePageChange = (page) => {
     setPage(page);
@@ -104,13 +104,24 @@ export default function Reservasi() {
     setSearchParams(searchParams);
   };
 
+  const handleSearch = () => {
+    const newData = dataPelanggan.filter((item) =>
+      item.name.toLowerCase().includes(search.toLowerCase())
+    );
+    setData(newData);
+    setPage(1);
+  };
+
   useEffect(() => {
-    if (reservationsData.length > 0) {
-      const newData = reservationsData.slice((page - 1) * 5, page * 5);
+    if (dataPelanggan.length > 0) {
+      const newData = dataPelanggan.slice((page - 1) * 5, page * 5);
       setData(newData);
       setPage(parseInt(page));
+      if (search) {
+        handleSearch();
+      }
     }
-  }, [page]);
+  }, [page, search]);
 
   const TableData = () => {
     return (
@@ -131,28 +142,19 @@ export default function Reservasi() {
                 </div>
               </th>
               <th scope="col" className="px-6 py-3">
-                No
+                ID
               </th>
               <th scope="col" className="px-12 lg:px-6  py-3">
-                Nama Pelanggan
+                Nama
               </th>
               <th scope="col" className="px-6 py-3">
-                Unit
+                Contact
               </th>
               <th scope="col" className="px-6 py-3">
-                Plat
+                Tgl Daftar
               </th>
               <th scope="col" className="px-6 py-3">
-                Tgl Dimulai
-              </th>
-              <th scope="col" className="px-6 py-3">
-                Tgl Selesai
-              </th>
-              <th scope="col" className="px-6 py-3">
-                Total Harga
-              </th>
-              <th scope="col" className="px-6 py-3">
-                Status
+                Total Reservasi
               </th>
               <th scope="col" className="px-6 py-3">
                 Action
@@ -184,34 +186,34 @@ export default function Reservasi() {
                   {item.id}
                 </th>
                 <td className="px-6 py-4">
-                  <p className="w-max font-semibold capitalize text-black">
-                    {item.customerName}
-                  </p>
+                  <div className="w-max flex items-center gap-1">
+                    {item.jekel === "laki-laki" ? (
+                      <FcBusinessman size={20} />
+                    ) : (
+                      <FcBusinesswoman size={20} />
+                    )}
+                    <p className="w-max font-semibold capitalize text-black">
+                      {item.name}
+                    </p>
+                  </div>
                 </td>
+                <td className="px-6 py-4">
+                  <div className="flex flex-col gap-1">
+                    <p className="p-1 rounded-md bg-green-500 w-max text-white text-[.8rem]">
+                      {item.email}
+                    </p>
+                    <p className="p-1 rounded-md bg-red-500 w-max text-white text-[.8rem]">
+                      {item.phone}
+                    </p>
+                    <p className="p-1 rounded-md bg-yellow-500 w-max text-white text-[.8rem]">
+                      {item.address}
+                    </p>
+                  </div>
+                </td>
+                <td className="px-6 py-4">{formatDate(item.joinDate)}</td>
                 <td className="px-6 py-4">
                   <p className="w-max font-semibold capitalize">
-                    {item.carName}
-                  </p>
-                </td>
-                <td className="px-6 py-4">
-                  <p className="w-max font-semibold capitalize">
-                    {item.licensePlate}
-                  </p>
-                </td>
-                <td className="px-6 py-4">{formatDate(item.startDate)}</td>
-                <td className="px-6 py-4">{formatDate(item.endDate)}</td>
-                <td className="px-6 py-4">
-                  RP. {item.totalPrice.toLocaleString("id-ID")}
-                </td>
-                <td className="px-6 py-4">
-                  <p
-                    className={`${
-                      item.status === "Aktif"
-                        ? "bg-green-500 animate-pulse"
-                        : "bg-blue-500"
-                    } p-2  text-white w-[80px] text-center text-[.9rem] rounded-lg`}
-                  >
-                    {item.status}
+                    {item.totalReservations}
                   </p>
                 </td>
 
@@ -219,9 +221,6 @@ export default function Reservasi() {
                   <div className="w-full h-full flex items-center justify-center gap-3 ">
                     <button title="edit">
                       <CiEdit size={23} className="text-green-500" />
-                    </button>
-                    <button title="selesai">
-                      <IoMdCheckboxOutline size={23} className="text-sky-500" />
                     </button>
                   </div>
                 </td>
@@ -235,12 +234,12 @@ export default function Reservasi() {
 
   return (
     <AppShell>
-      <main className="w-full ">
-        <h1 className="text-[1.1rem] lg:text-[1.3rem]">Reservasi</h1>
+      <main className="w-full">
+        <h1 className="text-[1.1rem] lg:text-[1.3rem]">Pelanggan</h1>
         <div className="w-full mt-6 bg-white rounded-md ">
           <div className="w-full flex items-center justify-between  p-3">
             <div className="flex items-center gap-3">
-              <Link to={"/reservasi/create"}>
+              <Link to={"/pelanggan/add"}>
                 <MdOutlineAddCircle size={30} className="text-green-500" />
               </Link>
             </div>
@@ -250,7 +249,9 @@ export default function Reservasi() {
         </div>
         <div className="w-max mt-6 m-auto border-bb">
           <Pagination
-            total={Math.ceil(reservationsData.length / 5)}
+            total={Math.ceil(
+              search ? data.length / 5 : dataPelanggan.length / 5
+            )}
             value={activePage}
             onChange={(e) => handlePageChange(e)}
           />

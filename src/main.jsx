@@ -14,6 +14,7 @@ import AddUnit from "./pages/unit/add.jsx";
 import DetailUnit from "./pages/unit/detail.jsx";
 import Reservasi from "./pages/reservasi/index.jsx";
 import CreateReservasi from "./pages/reservasi/create.jsx";
+import Pelanggan from "./pages/pelanggan/index.jsx";
 const theme = {
   fontFamily: "", // Menggunakan font Nunito
 };
@@ -33,6 +34,8 @@ createRoot(document.getElementById("root")).render(
 
           <Route path="/reservasi" element={<Reservasi />} />
           <Route path="/reservasi/create" element={<CreateReservasi />} />
+
+          <Route path="/pelanggan" element={<Pelanggan />} />
         </Routes>
       </BrowserRouter>
     </StrictMode>
