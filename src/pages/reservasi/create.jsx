@@ -53,6 +53,16 @@ export default function CreateReservasi() {
               radius={"md"}
               className="w-full "
             />
+            <Select
+              label="Metode pembayaran"
+              withAsterisk
+              required
+              size="md"
+              radius={"md"}
+              className="w-full "
+              placeholder="Pilih unit"
+              data={["Transfer", "Cash"]}
+            />
           </div>
           <div className="w-full h-max flex flex-col gap-2 py-3 lg:py-0  lg:px-3 lg:w-[45%] border-t-2 border-t-gray-300 lg:border-t-0 lg:border-l-2 lg:border-l-gray-300">
             <div className="w-max flex-horizontal gap-3">
@@ -75,6 +85,12 @@ export default function CreateReservasi() {
               <p className="font-semibold">Total harga :</p>
               <p>
                 Rp. <span className="font-bold text-green-500"> 2.500.000</span>
+              </p>
+            </div>
+            <div className="w-max flex-horizontal gap-3">
+              <p className="font-semibold">Metode pembayaran :</p>
+              <p>
+                <span className="font-bold text-blue-500">Cash</span>
               </p>
             </div>
             <Button
