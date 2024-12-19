@@ -17,6 +17,9 @@ import CreateReservasi from "./pages/reservasi/create.jsx";
 import Pelanggan from "./pages/pelanggan/index.jsx";
 import AddPelanggan from "./pages/pelanggan/add.jsx";
 import Transaksi from "./pages/transaksi/index.jsx";
+import User from "./pages/user/index.jsx";
+import AddUsers from "./pages/user/add.jsx";
+import Roles from "./pages/roles/index.jsx";
 const theme = {
   fontFamily: "", // Menggunakan font Nunito
 };
@@ -41,6 +44,10 @@ createRoot(document.getElementById("root")).render(
           <Route path="/pelanggan/add" element={<AddPelanggan />} />
 
           <Route path="/transaksi" element={<Transaksi />} />
+          <Route path="/users" element={<User />} />
+          <Route path="/users/add" element={<AddUsers />} />
+
+          <Route path="/roles" element={<Roles />} />
         </Routes>
       </BrowserRouter>
     </StrictMode>

@@ -1,30 +1,39 @@
 import AppShell from "../../components/template/app-shell";
 import { Pagination } from "@mantine/core";
-import { useSearchParams } from "react-router-dom";
+import { Link, useSearchParams } from "react-router-dom";
 import { useEffect, useState } from "react";
 import InputSearch from "../../components/ui/input-search";
+import { formatDate } from "../../utils";
+import { CiEdit } from "react-icons/ci";
+import { MdOutlineAddCircle } from "react-icons/md";
+
 const reservationsData = [
   {
     id: 1,
-    id_reservasi: "RSV001",
-    customerName: "Budi Santoso",
-    carName: "Toyota Avanza",
-    licensePlate: "B 1234 XYZ",
-    metode_pembayaran: "cash",
-    totalPrice: 1500000,
+    name: "super admin",
+    permissions: [
+      "unit",
+      "reservasi",
+      "pelanggan",
+      "transaksi",
+      "users",
+      "roles",
+    ],
+    pengguna: 1,
+    created_at: "2023-01-01",
+    update_at: "2023-01-01",
   },
   {
     id: 2,
-    id_reservasi: "RSV002",
-    customerName: "Doni Saputra",
-    carName: "Suzuki Ertiga",
-    licensePlate: "B 9101 DEF",
-    metode_pembayaran: "transfer bank",
-    totalPrice: 1800000,
+    name: "staff",
+    permissions: ["unit", "reservasi", "pelanggan"],
+    pengguna: 4,
+    created_at: "2023-05-02",
+    update_at: "2023-12-09",
   },
 ];
 
-export default function Transaksi() {
+export default function Roles() {
   const [activePage, setPage] = useState(1);
   const [data, setData] = useState();
 
@@ -67,19 +76,22 @@ export default function Transaksi() {
                 No
               </th>
               <th scope="col" className="px-6 py-3">
-                ID reservasi
+                Nama
               </th>
               <th scope="col" className="px-12 lg:px-6  py-3">
-                Nama Pelanggan
+                Permissions
               </th>
               <th scope="col" className="px-6 py-3">
-                Unit
+                Pengguna
               </th>
               <th scope="col" className="px-6 py-3">
-                Metode Pembayaran
+                Created At
               </th>
               <th scope="col" className="px-6 py-3">
-                Total
+                Update At
+              </th>
+              <th scope="col" className="px-6 py-3">
+                Actions
               </th>
             </tr>
           </thead>
@@ -108,40 +120,44 @@ export default function Transaksi() {
                   {item.id}
                 </th>
                 <th scope="row" className="px-6 py-4 capitalize">
-                  {item.id_reservasi}
+                  <p
+                    className={`w-max font-semibold capitalize p-2 rounded-md  ${
+                      item.name == "super admin"
+                        ? "bg-red-200 text-red-500"
+                        : "bg-blue-200 text-blue-500"
+                    }`}
+                  >
+                    {item.name}
+                  </p>
                 </th>
                 <td className="px-6 py-4">
-                  <p className="w-max font-semibold capitalize text-black">
-                    {item.customerName}
+                  <p className="w-max font-semibold capitalize text-[.9rem] text-gray-600 bg-gray-200 p-2 rounded-md">
+                    {item.permissions.join(", ")}
                   </p>
                 </td>
                 <td className="px-6 py-4">
-                  <div className="flex flex-col gap-1">
-                    <p className="w-max font-semibold ">{item.carName}</p>
-                    <p className="p-1 rounded-md bg-yellow-500 w-max text-white text-[.8rem]">
-                      {item.licensePlate}
-                    </p>
-                  </div>
+                  <p className="w-max font-semibold capitalize text-yellow-500">
+                    {item.pengguna}
+                  </p>
                 </td>
 
                 <td className="px-6 py-4">
-                  <p
-                    className={`w-max font-semibold p-2 rounded-md   capitalize ${
-                      item.metode_pembayaran == "cash"
-                        ? "bg-sky-200 text-sky-600"
-                        : "bg-orange-200 text-orange-500"
-                    }`}
-                  >
-                    {item.metode_pembayaran}
+                  <p className="w-max font-semibold">
+                    {formatDate(item.created_at)}
                   </p>
                 </td>
                 <td className="px-6 py-4">
                   <p className="w-max font-semibold">
-                    Rp.{" "}
-                    <span className="text-green-500 font-semibold">
-                      {item.totalPrice.toLocaleString("id-ID")}
-                    </span>
+                    {formatDate(item.update_at)}
                   </p>
+                </td>
+
+                <td className="px-6 py-4 ">
+                  <div className="w-full h-full flex items-center justify-center gap-3 ">
+                    <button title="edit">
+                      <CiEdit size={23} className="text-green-500" />
+                    </button>
+                  </div>
                 </td>
               </tr>
             ))}
@@ -154,9 +170,14 @@ export default function Transaksi() {
   return (
     <AppShell>
       <main className="w-full ">
-        <h1 className="text-[1.1rem] lg:text-[1.3rem]">Transaksi</h1>
+        <h1 className="text-[1.1rem] lg:text-[1.3rem]">Roles Permissions</h1>
         <div className="w-full mt-6 bg-white rounded-md ">
           <div className="w-full flex items-center justify-between  p-3">
+            <div className="flex items-center gap-3">
+              <Link to={"/users/add"}>
+                <MdOutlineAddCircle size={30} className="text-green-500" />
+              </Link>
+            </div>
             <InputSearch />
           </div>
           <TableData />
