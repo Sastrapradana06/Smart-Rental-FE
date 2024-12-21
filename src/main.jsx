@@ -20,6 +20,7 @@ import Transaksi from "./pages/transaksi/index.jsx";
 import User from "./pages/user/index.jsx";
 import AddUsers from "./pages/user/add.jsx";
 import Roles from "./pages/roles/index.jsx";
+import AddRoles from "./pages/roles/add.jsx";
 const theme = {
   fontFamily: "", // Menggunakan font Nunito
 };
@@ -48,6 +49,7 @@ createRoot(document.getElementById("root")).render(
           <Route path="/users/add" element={<AddUsers />} />
 
           <Route path="/roles" element={<Roles />} />
+          <Route path="/roles/add" element={<AddRoles />} />
         </Routes>
       </BrowserRouter>
     </StrictMode>

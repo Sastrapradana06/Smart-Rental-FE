@@ -1,11 +1,60 @@
 import { Button, Select, TextInput } from "@mantine/core";
 import AppShell from "../../components/template/app-shell";
+import { Alert, useHandleAlert } from "sstra-alert";
+
 import "./unit.css";
 import { Link } from "react-router-dom";
 import { IoIosArrowBack } from "react-icons/io";
+import { useRef, useState } from "react";
 export default function AddUnit() {
+  const [valueFile, setValueFile] = useState();
+  const [inputValue, setInputValue] = useState({
+    unit: "",
+    no_plat: "",
+    tahun: "",
+    jenis: "",
+    transmisi: "",
+    doors: "",
+    seats: "",
+    harga_sewa: "",
+    quantity: "",
+  });
+  const fileInputRef = useRef(null);
+  const { status, data, handleAlert } = useHandleAlert();
+
+  const handleInputValue = (name, value) => {
+    setInputValue({
+      ...inputValue,
+      [name]: value,
+    });
+  };
+
+  const handleFileChange = (event) => {
+    const file = event.target.files[0];
+    if (file) {
+      const url = URL.createObjectURL(file);
+      setValueFile({
+        url,
+        file,
+      });
+    }
+  };
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    const data = { file: valueFile.file, ...inputValue };
+    handleAlert("success", "Unit berhasil ditambahkan");
+    console.log({ data });
+  };
+
   return (
     <AppShell>
+      <Alert
+        status={status}
+        type={data.type}
+        message={data.message}
+        background={"bg-gray-700"}
+      />
       <main className="w-full ">
         <div className="flex items-center gap-2">
           <Link to="/unit">
@@ -16,16 +65,32 @@ export default function AddUnit() {
         <section className="container-form-unit">
           <div className="w-[80%] lg:w-[25%] h-max ">
             <img
-              src="/pajero.png"
+              src={valueFile?.url || "/pajero.png"}
               className="w-full h-[250px] border-2 p-1 border-dashed border-gray-500 rounded-md object-cover"
               alt=""
             />
-            <Button color="cyan" className="mt-4">
+            <Button
+              color="cyan"
+              className="mt-4"
+              onClick={() => fileInputRef.current.click()}
+            >
               Pilih Gambar
             </Button>
           </div>
-          <form className="w-full lg:w-[65%] flex flex-col gap-3">
+          <form
+            className="w-full lg:w-[65%] flex flex-col gap-3"
+            onSubmit={handleSubmit}
+          >
+            <input
+              type="file"
+              ref={fileInputRef}
+              className="hidden"
+              onChange={handleFileChange}
+            />
             <TextInput
+              name="unit"
+              value={inputValue.unit}
+              onChange={(e) => handleInputValue(e.target.name, e.target.value)}
               label="Nama unit"
               required
               withAsterisk
@@ -37,6 +102,11 @@ export default function AddUnit() {
             <div className="input-group">
               <TextInput
                 label="Nomor Plat"
+                name="no_plat"
+                value={inputValue.no_plat}
+                onChange={(e) =>
+                  handleInputValue(e.target.name, e.target.value)
+                }
                 required
                 withAsterisk
                 placeholder="B 1234 AB"
@@ -46,6 +116,11 @@ export default function AddUnit() {
               />
               <TextInput
                 label="Tahun unit"
+                name="tahun"
+                value={inputValue.tahun}
+                onChange={(e) =>
+                  handleInputValue(e.target.name, e.target.value)
+                }
                 required
                 withAsterisk
                 placeholder=""
@@ -57,6 +132,9 @@ export default function AddUnit() {
             <div className="input-group">
               <Select
                 label="Jenis unit"
+                name="jenis"
+                value={inputValue.jenis}
+                onChange={(value) => handleInputValue("jenis", value)}
                 withAsterisk
                 required
                 size="md"
@@ -67,6 +145,9 @@ export default function AddUnit() {
               />
               <Select
                 label="Transmisi"
+                name="transmisi"
+                value={inputValue.transmisi}
+                onChange={(value) => handleInputValue("transmisi", value)}
                 withAsterisk
                 required
                 size="md"
@@ -79,6 +160,9 @@ export default function AddUnit() {
             <div className="input-group">
               <Select
                 label="Doors"
+                name="doors"
+                value={inputValue.doors}
+                onChange={(value) => handleInputValue("doors", value)}
                 withAsterisk
                 required
                 size="md"
@@ -89,6 +173,9 @@ export default function AddUnit() {
               />
               <Select
                 label="Seats"
+                name="seats"
+                value={inputValue.seats}
+                onChange={(value) => handleInputValue("seats", value)}
                 withAsterisk
                 required
                 size="md"
@@ -101,6 +188,11 @@ export default function AddUnit() {
             <div className="input-group">
               <TextInput
                 label="Harga sewa"
+                name="harga_sewa"
+                value={inputValue.harga_sewa}
+                onChange={(e) =>
+                  handleInputValue(e.target.name, e.target.value)
+                }
                 leftSection="Rp."
                 required
                 withAsterisk
@@ -111,6 +203,11 @@ export default function AddUnit() {
               />
               <TextInput
                 label="Quantity"
+                name="quantity"
+                value={inputValue.quantity}
+                onChange={(e) =>
+                  handleInputValue(e.target.name, e.target.value)
+                }
                 required
                 withAsterisk
                 placeholder="12"

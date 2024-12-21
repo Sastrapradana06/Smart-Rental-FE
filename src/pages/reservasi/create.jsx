@@ -38,6 +38,7 @@ export default function CreateReservasi() {
             <DateInput
               label="Tgl dimulai"
               placeholder="Pilih tanggal"
+              defaultValue={new Date()}
               withAsterisk
               required
               size="md"

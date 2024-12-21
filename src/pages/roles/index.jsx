@@ -174,7 +174,7 @@ export default function Roles() {
         <div className="w-full mt-6 bg-white rounded-md ">
           <div className="w-full flex items-center justify-between  p-3">
             <div className="flex items-center gap-3">
-              <Link to={"/users/add"}>
+              <Link to={"/roles/add"}>
                 <MdOutlineAddCircle size={30} className="text-green-500" />
               </Link>
             </div>
