@@ -23,12 +23,30 @@ export default function Login() {
       .required("Password harus diisi"),
   });
 
-  const handleSubmit = (values) => {
-    console.log("Form Values:", values);
-    handleAlert("success", "Login Berhasil");
-    setTimeout(() => {
-      navigate("/dashboard");
-    }, 3000);
+  const handleSubmit = async (values) => {
+    try {
+      const res = await fetch("http://localhost:3000/auth/login", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          email: values.email,
+          password: values.password,
+        }),
+      });
+
+      const data = await res.json();
+      if (data.error) {
+        handleAlert("error", data.error);
+        return;
+      }
+
+      handleAlert("success", "Login Berhasil");
+    } catch (error) {
+      console.log(error);
+      handleAlert("error", error.message);
+    }
   };
 
   return (

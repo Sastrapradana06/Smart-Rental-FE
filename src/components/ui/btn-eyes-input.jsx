@@ -4,7 +4,11 @@ import { FaEyeSlash } from "react-icons/fa";
 
 const BtnEyesInput = ({ state, setState }) => {
   return (
-    <button className="cursor-pointer" onClick={() => setState(!state)}>
+    <button
+      className="cursor-pointer"
+      onClick={() => setState(!state)}
+      type="button"
+    >
       {state ? <FaEyeSlash size={25} /> : <IoEyeSharp size={25} />}
     </button>
   );
