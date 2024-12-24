@@ -9,6 +9,7 @@ import TextErrorInput from "../../components/ui/text-error-input";
 import BtnEyesInput from "../../components/ui/btn-eyes-input";
 import { Alert, useHandleAlert } from "sstra-alert";
 import { useNavigate } from "react-router-dom";
+import { useUserLogin } from "../../queries/useCustomQuery";
 export default function Login() {
   const [isShowPw, setIsShowPw] = useState(false);
   const { status, data, handleAlert } = useHandleAlert();
@@ -23,30 +24,19 @@ export default function Login() {
       .required("Password harus diisi"),
   });
 
+  const login = useUserLogin();
+
   const handleSubmit = async (values) => {
-    try {
-      const res = await fetch("http://localhost:3000/auth/login", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({
-          email: values.email,
-          password: values.password,
-        }),
-      });
-
-      const data = await res.json();
-      if (data.error) {
-        handleAlert("error", data.error);
-        return;
-      }
-
-      handleAlert("success", "Login Berhasil");
-    } catch (error) {
-      console.log(error);
-      handleAlert("error", error.message);
-    }
+    login.mutate(values, {
+      onSuccess: (res) => {
+        console.log(res);
+        handleAlert("success", "Login berhasil");
+      },
+      onError: (err) => {
+        console.log(err);
+        handleAlert("error", err.message);
+      },
+    });
   };
 
   return (

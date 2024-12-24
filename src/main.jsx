@@ -21,37 +21,40 @@ import User from "./pages/user/index.jsx";
 import AddUsers from "./pages/user/add.jsx";
 import Roles from "./pages/roles/index.jsx";
 import AddRoles from "./pages/roles/add.jsx";
+import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 const theme = {
   fontFamily: "", // Menggunakan font Nunito
 };
-
+const queryClient = new QueryClient();
 createRoot(document.getElementById("root")).render(
   <MantineProvider theme={theme} defaultColorScheme="light">
-    <StrictMode>
-      <BrowserRouter>
-        <Routes>
-          <Route path="/" element={<App />} />
-          <Route path="/login" element={<Login />} />
+    <QueryClientProvider client={queryClient}>
+      <StrictMode>
+        <BrowserRouter>
+          <Routes>
+            <Route path="/" element={<App />} />
+            <Route path="/login" element={<Login />} />
 
-          <Route path="/dashboard" element={<Dashboard />} />
-          <Route path="/unit" element={<Unit />} />
-          <Route path="/unit/add" element={<AddUnit />} />
-          <Route path="/unit/:id" element={<DetailUnit />} />
+            <Route path="/dashboard" element={<Dashboard />} />
+            <Route path="/unit" element={<Unit />} />
+            <Route path="/unit/add" element={<AddUnit />} />
+            <Route path="/unit/:id" element={<DetailUnit />} />
 
-          <Route path="/reservasi" element={<Reservasi />} />
-          <Route path="/reservasi/create" element={<CreateReservasi />} />
+            <Route path="/reservasi" element={<Reservasi />} />
+            <Route path="/reservasi/create" element={<CreateReservasi />} />
 
-          <Route path="/pelanggan" element={<Pelanggan />} />
-          <Route path="/pelanggan/add" element={<AddPelanggan />} />
+            <Route path="/pelanggan" element={<Pelanggan />} />
+            <Route path="/pelanggan/add" element={<AddPelanggan />} />
 
-          <Route path="/transaksi" element={<Transaksi />} />
-          <Route path="/users" element={<User />} />
-          <Route path="/users/add" element={<AddUsers />} />
+            <Route path="/transaksi" element={<Transaksi />} />
+            <Route path="/users" element={<User />} />
+            <Route path="/users/add" element={<AddUsers />} />
 
-          <Route path="/roles" element={<Roles />} />
-          <Route path="/roles/add" element={<AddRoles />} />
-        </Routes>
-      </BrowserRouter>
-    </StrictMode>
+            <Route path="/roles" element={<Roles />} />
+            <Route path="/roles/add" element={<AddRoles />} />
+          </Routes>
+        </BrowserRouter>
+      </StrictMode>
+    </QueryClientProvider>
   </MantineProvider>
 );
