@@ -10,8 +10,11 @@ import BtnEyesInput from "../../components/ui/btn-eyes-input";
 import { Alert, useHandleAlert } from "sstra-alert";
 import { useNavigate } from "react-router-dom";
 import { useUserLogin } from "../../queries/useCustomQuery";
+
+import Loading from "../../components/layout/loading";
 export default function Login() {
   const [isShowPw, setIsShowPw] = useState(false);
+
   const { status, data, handleAlert } = useHandleAlert();
   const navigate = useNavigate();
 
@@ -20,7 +23,7 @@ export default function Login() {
       .email("Email tidak valid")
       .required("Email harus diisi"),
     password: Yup.string()
-      .min(6, "Password minimal 6 karakter")
+      .min(5, "Password minimal 6 karakter")
       .required("Password harus diisi"),
   });
 
@@ -28,9 +31,11 @@ export default function Login() {
 
   const handleSubmit = async (values) => {
     login.mutate(values, {
-      onSuccess: (res) => {
-        console.log(res);
+      onSuccess: () => {
         handleAlert("success", "Login berhasil");
+        setTimeout(() => {
+          navigate("/dashboard");
+        }, 1000);
       },
       onError: (err) => {
         console.log(err);
@@ -47,6 +52,7 @@ export default function Login() {
         message={data.message}
         background={"bg-white"}
       />
+      {login.isPending && <Loading />}
       <section className="card-login">
         <main className="w-[450px] h-max text-white py-10 px-8 bg-blur-black">
           <h1 className="text-center benner text-[2rem] tracking-widest">
@@ -56,7 +62,7 @@ export default function Login() {
             Access your account to continue.
           </p>
           <Formik
-            initialValues={{ email: "", password: "" }}
+            initialValues={{ email: "admin@gmail.com", password: "admin123" }}
             validationSchema={LoginSchema}
             onSubmit={(values) => {
               handleSubmit(values);

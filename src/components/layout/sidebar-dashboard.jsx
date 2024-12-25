@@ -11,6 +11,7 @@ import { Drawer } from "@mantine/core";
 import { GoShieldLock } from "react-icons/go";
 export default function SidebarDashboard({ opened, close }) {
   const { pathname } = useLocation();
+  const user = JSON.parse(localStorage.getItem("user"));
 
   const modules = [
     {
@@ -106,7 +107,9 @@ export default function SidebarDashboard({ opened, close }) {
         title={
           <h1 className="text-[.9rem]">
             Selamat Datang,{" "}
-            <span className="text-orange-500 font-semibold">Admin</span>
+            <span className="text-orange-500 font-semibold capitalize">
+              {user?.name}
+            </span>
           </h1>
         }
       >

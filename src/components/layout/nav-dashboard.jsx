@@ -7,6 +7,8 @@ export default function NavDashboard() {
   const [opened, { open, close }] = useDisclosure(false);
   const { colorScheme } = useMantineColorScheme();
 
+  const user = JSON.parse(localStorage.getItem("user"));
+
   return (
     <nav
       className={`${
@@ -18,7 +20,9 @@ export default function NavDashboard() {
         <div className="w-max">
           <h1 className="hidden lg:block">
             Selamat Datang,{" "}
-            <span className="text-teal-500 font-semibold">Admin</span>
+            <span className="text-teal-500 font-semibold capitalize">
+              {user?.name}
+            </span>
           </h1>
           <button className="lg:hidden" onClick={open}>
             <RiMenu2Fill size={25} />

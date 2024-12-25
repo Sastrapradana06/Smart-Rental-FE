@@ -9,10 +9,12 @@ export const POST = async (endpoint, data) => {
     body: JSON.stringify(data),
   });
 
-  if (!response.ok) {
-    const error = await response.json();
-    throw new Error(error.message || "Something went wrong");
-  }
+  // if (!response.ok) {
+  //   const error = await response.json();
+  //   console.log(error);
+
+  //   throw new Error(error.error || "Something went wrong");
+  // }
 
   return response.json();
 };

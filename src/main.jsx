@@ -22,10 +22,12 @@ import AddUsers from "./pages/user/add.jsx";
 import Roles from "./pages/roles/index.jsx";
 import AddRoles from "./pages/roles/add.jsx";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
+import PrivateRoute from "./components/routing/private-route.jsx";
 const theme = {
   fontFamily: "", // Menggunakan font Nunito
 };
 const queryClient = new QueryClient();
+
 createRoot(document.getElementById("root")).render(
   <MantineProvider theme={theme} defaultColorScheme="light">
     <QueryClientProvider client={queryClient}>
@@ -35,7 +37,10 @@ createRoot(document.getElementById("root")).render(
             <Route path="/" element={<App />} />
             <Route path="/login" element={<Login />} />
 
-            <Route path="/dashboard" element={<Dashboard />} />
+            <Route element={<PrivateRoute />}>
+              <Route path="/dashboard" element={<Dashboard />} />
+            </Route>
+
             <Route path="/unit" element={<Unit />} />
             <Route path="/unit/add" element={<AddUnit />} />
             <Route path="/unit/:id" element={<DetailUnit />} />

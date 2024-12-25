@@ -4,6 +4,7 @@ import { IoMdCheckbox } from "react-icons/io";
 import { FaCalendarCheck } from "react-icons/fa";
 import { MdOutlineShowChart } from "react-icons/md";
 import { BarChart, AreaChart } from "@mantine/charts";
+
 export default function Dashboard() {
   const dataProfit = [
     { month: "January", PROFIT: 5000000 },
