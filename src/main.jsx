@@ -41,6 +41,8 @@ createRoot(document.getElementById("root")).render(
 
             <Route element={<PrivateRoute />}>
               <Route path="/dashboard" element={<Dashboard />} />
+              <Route path="/roles" element={<Roles />} />
+              <Route path="/roles/add" element={<AddRoles />} />
             </Route>
 
             <Route path="/unit" element={<Unit />} />
@@ -56,9 +58,6 @@ createRoot(document.getElementById("root")).render(
             <Route path="/transaksi" element={<Transaksi />} />
             <Route path="/users" element={<User />} />
             <Route path="/users/add" element={<AddUsers />} />
-
-            <Route path="/roles" element={<Roles />} />
-            <Route path="/roles/add" element={<AddRoles />} />
           </Routes>
           <ReactQueryDevtools initialIsOpen={true} />
         </BrowserRouter>

@@ -1,6 +1,6 @@
 import { POST } from "../api";
 import Cookies from "js-cookie";
-export const loginUser = async (email, password) => {
+export const loginUserServices = async (email, password) => {
   const api = await POST("/auth/login", { email, password });
 
   if (api.error) {

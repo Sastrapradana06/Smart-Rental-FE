@@ -1,8 +1,8 @@
 import { useMutation, useQuery } from "@tanstack/react-query";
 import {
   addRolesServices,
-  deleteRole,
-  getRoles,
+  deleteRoleServices,
+  getRolesServices,
 } from "../services/role.services";
 
 export const useAddRoles = () => {
@@ -14,13 +14,13 @@ export const useAddRoles = () => {
 export const useRoles = () => {
   return useQuery({
     queryKey: ["roles"],
-    queryFn: () => getRoles(),
+    queryFn: () => getRolesServices(),
     staleTime: 5 * 60 * 1000,
   });
 };
 
 export const useDeleteRole = () => {
   return useMutation({
-    mutationFn: (id) => deleteRole(id),
+    mutationFn: (id) => deleteRoleServices(id),
   });
 };

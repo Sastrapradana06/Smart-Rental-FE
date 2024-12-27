@@ -1,4 +1,5 @@
 const baseUrl = import.meta.env.VITE_API_BASE_URL;
+import Cookies from "js-cookie";
 
 export const POST = async (endpoint, data) => {
   const response = await fetch(`${baseUrl}${endpoint}`, {
@@ -9,18 +10,17 @@ export const POST = async (endpoint, data) => {
     body: JSON.stringify(data),
   });
 
-  // if (!response.ok) {
-  //   const error = await response.json();
-  //   console.log(error);
-
-  //   throw new Error(error.error || "Something went wrong");
-  // }
-
   return response.json();
 };
 
 export const GET = async (endpoint) => {
-  const response = await fetch(`${baseUrl}${endpoint}`);
+  const response = await fetch(`${baseUrl}${endpoint}`, {
+    method: "GET",
+    headers: {
+      "Content-Type": "application/json",
+      Authorization: `Bearer ${Cookies.get("token")}`,
+    },
+  });
   return response.json();
 };
 

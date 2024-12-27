@@ -5,16 +5,50 @@ import { useEffect, useState } from "react";
 import InputSearch from "../../components/ui/input-search";
 import { CiEdit } from "react-icons/ci";
 import { MdOutlineAddCircle } from "react-icons/md";
-import { useRoles } from "../../queries/useRoleQuery";
+import { useDeleteRole, useRoles } from "../../api/queries/useRoleQuery";
+import { FaRegTrashCan } from "react-icons/fa6";
+import { Alert, useHandleAlert } from "sstra-alert";
+import Loading from "../../components/layout/loading";
+import { useInvalidate } from "../../api/queries/useCustomQuery";
 
 export default function Roles() {
   const [activePage, setPage] = useState(1);
-  const [data, setData] = useState();
+  const [data, setData] = useState([]);
+  const [idRecords, setIdRecords] = useState([]);
+  const { status, data: alert, handleAlert } = useHandleAlert();
 
   const [searchParams, setSearchParams] = useSearchParams();
   const page = searchParams.get("page") || 1;
 
   const { data: roles, isLoading } = useRoles();
+  const deleteRoles = useDeleteRole();
+  const { invalidateListQuery } = useInvalidate();
+
+  const handleRecords = (id) => {
+    const isSelectedId = idRecords.includes(id);
+    if (isSelectedId) {
+      setIdRecords(idRecords.filter((item) => item !== id));
+    } else {
+      setIdRecords([...idRecords, id]);
+    }
+  };
+
+  const handleDelete = () => {
+    const data = {
+      ids: idRecords,
+    };
+
+    deleteRoles.mutate(data, {
+      onSuccess: async (res) => {
+        handleAlert("success", res.message);
+        await invalidateListQuery("roles");
+        setIdRecords([]);
+      },
+      onError: (error) => {
+        handleAlert("error", error.message);
+      },
+    });
+  };
 
   const handlePageChange = (page) => {
     setPage(page);
@@ -30,7 +64,7 @@ export default function Roles() {
         setPage(parseInt(page));
       }
     }
-  }, [page, isLoading]);
+  }, [page, isLoading, roles]);
 
   const TableData = () => {
     return (
@@ -83,7 +117,9 @@ export default function Roles() {
                   <div className="flex items-center">
                     <input
                       id="checkbox-table-search-1"
+                      checked={idRecords.includes(item.id)}
                       type="checkbox"
+                      onChange={() => handleRecords(item.id)}
                       className="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 dark:focus:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600"
                     />
                     <label
@@ -143,6 +179,13 @@ export default function Roles() {
 
   return (
     <AppShell>
+      <Alert
+        status={status}
+        type={alert.type}
+        message={alert.message}
+        background={"bg-white"}
+      />
+      {deleteRoles.isPending && <Loading />}
       <main className="w-full ">
         <h1 className="text-[1.1rem] lg:text-[1.3rem]">Roles Permissions</h1>
         <div className="w-full mt-6 bg-white rounded-md ">
@@ -151,6 +194,13 @@ export default function Roles() {
               <Link to={"/roles/add"}>
                 <MdOutlineAddCircle size={30} className="text-green-500" />
               </Link>
+              <button
+                className="p-2 rounded-md bg-red-200 hover:bg-red-300 duration-150 disabled:bg-red-50 disabled:cursor-not-allowed"
+                disabled={idRecords.length == 0 || idRecords == null}
+                onClick={handleDelete}
+              >
+                <FaRegTrashCan size={18} className="text-red-500" />
+              </button>
             </div>
             <InputSearch />
           </div>

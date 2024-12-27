@@ -9,9 +9,9 @@ import TextErrorInput from "../../components/ui/text-error-input";
 import BtnEyesInput from "../../components/ui/btn-eyes-input";
 import { Alert, useHandleAlert } from "sstra-alert";
 import { useNavigate } from "react-router-dom";
-import { useUserLogin } from "../../queries/useCustomQuery";
 
 import Loading from "../../components/layout/loading";
+import { useUserLogin } from "../../api/queries/useUserQuery";
 export default function Login() {
   const [isShowPw, setIsShowPw] = useState(false);
 

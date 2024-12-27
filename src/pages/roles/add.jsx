@@ -3,10 +3,10 @@ import { Link } from "react-router-dom";
 import { IoIosArrowBack } from "react-icons/io";
 import { Button, TextInput, MultiSelect } from "@mantine/core";
 import { useState } from "react";
-import { useAddRoles } from "../../queries/useRoleQuery";
+import { useAddRoles } from "../../api/queries/useRoleQuery";
 import { Alert, useHandleAlert } from "sstra-alert";
 import Loading from "../../components/layout/loading";
-import { useInvalidate } from "../../queries/useCustomQuery";
+import { useInvalidate } from "../../api/queries/useCustomQuery";
 
 export default function AddRoles() {
   const [nameRole, setNameRole] = useState("");
