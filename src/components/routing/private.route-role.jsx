@@ -1,7 +1,7 @@
 /* eslint-disable react/prop-types */
 import { Navigate, Outlet } from "react-router-dom";
 const PrivateRouteRole = ({ allowedJabatan }) => {
-  const user = localStorage.getItem("user");
+  const user = JSON.parse(localStorage.getItem("user"));
   console.log({ user, allowedJabatan });
 
   if (!user) {

@@ -3,35 +3,9 @@ import { Pagination } from "@mantine/core";
 import { Link, useSearchParams } from "react-router-dom";
 import { useEffect, useState } from "react";
 import InputSearch from "../../components/ui/input-search";
-import { formatDate } from "../../utils";
 import { CiEdit } from "react-icons/ci";
 import { MdOutlineAddCircle } from "react-icons/md";
-
-const reservationsData = [
-  {
-    id: 1,
-    name: "super admin",
-    permissions: [
-      "unit",
-      "reservasi",
-      "pelanggan",
-      "transaksi",
-      "users",
-      "roles",
-    ],
-    pengguna: 1,
-    created_at: "2023-01-01",
-    update_at: "2023-01-01",
-  },
-  {
-    id: 2,
-    name: "staff",
-    permissions: ["unit", "reservasi", "pelanggan"],
-    pengguna: 4,
-    created_at: "2023-05-02",
-    update_at: "2023-12-09",
-  },
-];
+import { useRoles } from "../../queries/useRoleQuery";
 
 export default function Roles() {
   const [activePage, setPage] = useState(1);
@@ -40,6 +14,8 @@ export default function Roles() {
   const [searchParams, setSearchParams] = useSearchParams();
   const page = searchParams.get("page") || 1;
 
+  const { data: roles, isLoading } = useRoles();
+
   const handlePageChange = (page) => {
     setPage(page);
     searchParams.set("page", page);
@@ -47,12 +23,14 @@ export default function Roles() {
   };
 
   useEffect(() => {
-    if (reservationsData.length > 0) {
-      const newData = reservationsData.slice((page - 1) * 5, page * 5);
-      setData(newData);
-      setPage(parseInt(page));
+    if (!isLoading) {
+      if (roles.length > 0) {
+        const newData = roles.slice((page - 1) * 5, page * 5);
+        setData(newData);
+        setPage(parseInt(page));
+      }
     }
-  }, [page]);
+  }, [page, isLoading]);
 
   const TableData = () => {
     return (
@@ -117,7 +95,7 @@ export default function Roles() {
                   </div>
                 </td>
                 <th scope="row" className="px-6 py-4 capitalize">
-                  {item.id}
+                  {index + 1}
                 </th>
                 <th scope="row" className="px-6 py-4 capitalize">
                   <p
@@ -142,14 +120,10 @@ export default function Roles() {
                 </td>
 
                 <td className="px-6 py-4">
-                  <p className="w-max font-semibold">
-                    {formatDate(item.created_at)}
-                  </p>
+                  <p className="w-max font-semibold">{item.created_at}</p>
                 </td>
                 <td className="px-6 py-4">
-                  <p className="w-max font-semibold">
-                    {formatDate(item.update_at)}
-                  </p>
+                  <p className="w-max font-semibold">{item.updated_at}</p>
                 </td>
 
                 <td className="px-6 py-4 ">
@@ -184,7 +158,7 @@ export default function Roles() {
         </div>
         <div className="w-max mt-6 m-auto border-bb">
           <Pagination
-            total={Math.ceil(reservationsData.length / 5)}
+            total={isLoading ? 0 : Math.ceil(roles.length / 5)}
             value={activePage}
             onChange={(e) => handlePageChange(e)}
           />
