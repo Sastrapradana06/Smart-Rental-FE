@@ -1,4 +1,4 @@
-import { POST } from "../api";
+import { GET, POST } from "../api";
 import Cookies from "js-cookie";
 export const loginUserServices = async (email, password) => {
   const api = await POST("/auth/login", { email, password });
@@ -15,4 +15,26 @@ export const loginUserServices = async (email, password) => {
   });
 
   localStorage.setItem("user", JSON.stringify(user));
+};
+
+export const getUserServices = async () => {
+  const api = await GET("/users");
+
+  if (!api.status) {
+    throw new Error(api.message);
+  }
+
+  return api.data;
+};
+
+export const addUserServices = async (data) => {
+  const api = await POST("/users", data);
+
+  console.log({ api });
+
+  if (!api.status) {
+    throw new Error(api.message);
+  }
+
+  return api;
 };

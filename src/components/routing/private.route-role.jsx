@@ -1,14 +1,16 @@
 /* eslint-disable react/prop-types */
 import { Navigate, Outlet } from "react-router-dom";
-const PrivateRouteRole = ({ allowedJabatan }) => {
+import { useRoleName } from "../../api/queries/useRoleQuery";
+const PrivateRouteRole = ({ page }) => {
   const user = JSON.parse(localStorage.getItem("user"));
-  console.log({ user, allowedJabatan });
+
+  const { data } = useRoleName(user?.roles);
 
   if (!user) {
     return <Navigate to={"/login"} />;
   }
 
-  const isAllowed = allowedJabatan.includes(user.roles);
+  const isAllowed = data?.permissions.includes(page);
 
   return isAllowed ? <Outlet /> : <Navigate to={"/dashboard"} />;
 };

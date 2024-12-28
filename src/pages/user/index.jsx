@@ -3,10 +3,13 @@ import AppShell from "../../components/template/app-shell";
 import { MdOutlineAddCircle } from "react-icons/md";
 import InputSearch from "../../components/ui/input-search";
 import { CiEdit } from "react-icons/ci";
-import { formatDate } from "../../utils";
 import { FcBusinessman, FcBusinesswoman } from "react-icons/fc";
 import { Pagination } from "@mantine/core";
 import { useEffect, useState } from "react";
+import { useUsers } from "../../api/queries/useUserQuery";
+import { Alert, useHandleAlert } from "sstra-alert";
+import Loading from "../../components/layout/loading";
+
 const dataPelanggan = [
   {
     id: "CUST001",
@@ -34,9 +37,13 @@ export default function User() {
   const [data, setData] = useState([]);
   const [activePage, setPage] = useState(1);
 
+  const { status, data: alert, handleAlert } = useHandleAlert();
+
   const [searchParams, setSearchParams] = useSearchParams();
   const page = searchParams.get("page") || 1;
   const search = searchParams.get("search") || null;
+
+  const { data: users, isLoading } = useUsers();
 
   const handlePageChange = (page) => {
     setPage(page);
@@ -45,23 +52,30 @@ export default function User() {
   };
 
   const handleSearch = () => {
-    const newData = dataPelanggan.filter((item) =>
+    const newData = users.filter((item) =>
       item.name.toLowerCase().includes(search.toLowerCase())
     );
-    setData(newData);
-    setPage(1);
+
+    if (newData.length === 0) {
+      handleAlert("info", "Data not found");
+    } else {
+      setData(newData);
+      setPage(1);
+    }
   };
 
   useEffect(() => {
-    if (dataPelanggan.length > 0) {
-      const newData = dataPelanggan.slice((page - 1) * 5, page * 5);
-      setData(newData);
-      setPage(parseInt(page));
+    if (!isLoading) {
+      if (users.length > 0) {
+        const newData = users.slice((page - 1) * 5, page * 5);
+        setData(newData);
+        setPage(parseInt(page));
+      }
       if (search) {
         handleSearch();
       }
     }
-  }, [page, search]);
+  }, [page, isLoading, users, search]);
 
   const TableData = () => {
     return (
@@ -143,17 +157,15 @@ export default function User() {
                       {item.email}
                     </p>
                     <p className="p-1 rounded-md bg-red-500 w-max text-white text-[.8rem]">
-                      {item.phone}
+                      {item.notel}
                     </p>
                     <p className="p-1 rounded-md bg-yellow-500 w-max text-white text-[.8rem]">
-                      {item.address}
+                      {item.alamat}
                     </p>
                   </div>
                 </td>
                 <td className="px-6 py-4">
-                  <p className="w-max font-semibold">
-                    {formatDate(item.joinDate)}
-                  </p>
+                  <p className="w-max font-semibold">{item.created_at}</p>
                 </td>
                 <td className="px-6 py-4">
                   <p
@@ -184,6 +196,13 @@ export default function User() {
 
   return (
     <AppShell>
+      <Alert
+        status={status}
+        type={alert.type}
+        message={alert.message}
+        background={"bg-white"}
+      />
+      {isLoading && <Loading />}
       <main className="w-full">
         <h1 className="text-[1.1rem] lg:text-[1.3rem]">Data Users</h1>
         <div className="w-full mt-6 bg-white rounded-md ">

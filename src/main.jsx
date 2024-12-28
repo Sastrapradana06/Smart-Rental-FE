@@ -24,6 +24,7 @@ import AddRoles from "./pages/roles/add.jsx";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import PrivateRoute from "./components/routing/private-route.jsx";
 import { ReactQueryDevtools } from "@tanstack/react-query-devtools";
+import PrivateRouteRole from "./components/routing/private.route-role.jsx";
 
 const theme = {
   fontFamily: "", // Menggunakan font Nunito
@@ -45,12 +46,17 @@ createRoot(document.getElementById("root")).render(
               <Route path="/roles/add" element={<AddRoles />} />
             </Route>
 
-            <Route path="/unit" element={<Unit />} />
+            <Route element={<PrivateRouteRole page={"Unit"} />}>
+              <Route path="/unit" element={<Unit />} />
+            </Route>
+
+            <Route element={<PrivateRouteRole page={"Reservasi"} />}>
+              <Route path="/reservasi" element={<Reservasi />} />
+              <Route path="/reservasi/create" element={<CreateReservasi />} />
+            </Route>
+
             <Route path="/unit/add" element={<AddUnit />} />
             <Route path="/unit/:id" element={<DetailUnit />} />
-
-            <Route path="/reservasi" element={<Reservasi />} />
-            <Route path="/reservasi/create" element={<CreateReservasi />} />
 
             <Route path="/pelanggan" element={<Pelanggan />} />
             <Route path="/pelanggan/add" element={<AddPelanggan />} />

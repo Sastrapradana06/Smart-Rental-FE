@@ -20,6 +20,16 @@ export const getRolesServices = async () => {
   return res.data;
 };
 
+export const getRoleNameServices = async (name) => {
+  const res = await GET(`/roles/${name}`);
+
+  if (!res.status) {
+    throw new Error(res.message);
+  }
+
+  return res.data;
+};
+
 export const deleteRoleServices = async (id) => {
   const res = await POST("/roles/delete-records", id);
 
