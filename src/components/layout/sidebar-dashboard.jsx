@@ -1,6 +1,6 @@
 /* eslint-disable react/prop-types */
 import { AiOutlineHome } from "react-icons/ai";
-import { Link, useLocation } from "react-router-dom";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 import { LiaCarSolid } from "react-icons/lia";
 import { IoFileTrayOutline } from "react-icons/io5";
 import { BiSolidUserDetail } from "react-icons/bi";
@@ -9,9 +9,15 @@ import { PiUsersThreeBold } from "react-icons/pi";
 import { RiUserSettingsLine } from "react-icons/ri";
 import { Drawer } from "@mantine/core";
 import { GoShieldLock } from "react-icons/go";
+import { IoLogOutOutline } from "react-icons/io5";
+import Cookies from "js-cookie";
+import { useCancelQuery } from "../../api/queries/useCustomQuery";
+
 export default function SidebarDashboard({ opened, close }) {
   const { pathname } = useLocation();
   const user = JSON.parse(localStorage.getItem("user"));
+  const navigate = useNavigate();
+  const { cancelQuery } = useCancelQuery();
 
   const modules = [
     {
@@ -47,6 +53,19 @@ export default function SidebarDashboard({ opened, close }) {
     },
   ];
 
+  const logOut = async () => {
+    try {
+      await cancelQuery();
+      localStorage.removeItem("user");
+      Cookies.remove("token", { path: "/" });
+      setTimeout(() => {
+        navigate("/login");
+      }, 1500);
+    } catch (error) {
+      console.error("Error during logout:", error);
+    }
+  };
+
   const LinkNavigasi = ({ link, Icons, teks }) => {
     return (
       <Link
@@ -63,6 +82,18 @@ export default function SidebarDashboard({ opened, close }) {
         />
         <p className="font-semibold text-[.9rem]">{teks}</p>
       </Link>
+    );
+  };
+
+  const BtnLogout = () => {
+    return (
+      <button
+        className="w-full flex items-center gap-3  p-2 rounded-md cursor-pointer hover:bg-zinc-200 duration-200"
+        onClick={logOut}
+      >
+        <IoLogOutOutline size={20} className={`text-red-500`} />
+        <p className="font-semibold text-[.9rem] text-red-400">Log out</p>
+      </button>
     );
   };
 
@@ -85,6 +116,7 @@ export default function SidebarDashboard({ opened, close }) {
           </p>
           <div className="w-full flex-vertical gap-1 ">
             <LinkNavigasi link="/roles" Icons={GoShieldLock} teks="Roles" />
+            <BtnLogout />
           </div>
         </div>
       </>

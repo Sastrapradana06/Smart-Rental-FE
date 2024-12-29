@@ -29,7 +29,8 @@ export default function NavDashboard() {
           </button>
         </div>
         <div className="w-max flex items-center gap-4">
-          <ToggleTheme />
+          {/* <ToggleTheme /> */}
+
           <Avatar color="cyan" radius="xl">
             MK
           </Avatar>

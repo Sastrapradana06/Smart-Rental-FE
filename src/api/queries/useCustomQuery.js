@@ -10,3 +10,13 @@ export function useInvalidate() {
 
   return { invalidateListQuery };
 }
+
+export const useCancelQuery = () => {
+  const query = useQueryClient();
+
+  const cancelQuery = async () => {
+    await query.cancelQueries();
+  };
+
+  return { cancelQuery };
+};
