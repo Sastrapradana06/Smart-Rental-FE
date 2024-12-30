@@ -24,8 +24,6 @@ export default function AddUsers() {
   const { invalidateListQuery } = useInvalidate();
   const { data: roles, isLoading } = useRoles();
 
-  console.log({ roles });
-
   const handleInputValue = (field, value) => {
     setValueInput((prev) => ({
       ...prev,
@@ -35,7 +33,6 @@ export default function AddUsers() {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    console.log({ valueInput });
 
     mutate(valueInput, {
       onSuccess: async (res) => {

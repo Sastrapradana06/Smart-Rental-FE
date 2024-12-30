@@ -30,11 +30,18 @@ export const getUserServices = async () => {
 export const addUserServices = async (data) => {
   const api = await POST("/users", data);
 
-  console.log({ api });
-
   if (!api.status) {
     throw new Error(api.message);
   }
 
   return api;
+};
+
+export const deleteUserServices = async (id) => {
+  const res = await POST("/users/delete-records", id);
+
+  if (!res.status) {
+    throw new Error(res.message);
+  }
+  return res;
 };

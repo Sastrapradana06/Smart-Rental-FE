@@ -2,11 +2,11 @@ import { Link, useSearchParams } from "react-router-dom";
 import AppShell from "../../components/template/app-shell";
 import { MdOutlineAddCircle } from "react-icons/md";
 import InputSearch from "../../components/ui/input-search";
-import { CiEdit } from "react-icons/ci";
 import { formatDate } from "../../utils";
 import { FcBusinessman, FcBusinesswoman } from "react-icons/fc";
 import { Pagination } from "@mantine/core";
 import { useEffect, useState } from "react";
+import { BtnEdit } from "../../components/ui/btn-edit";
 const dataPelanggan = [
   {
     id: "CUST001",
@@ -219,9 +219,7 @@ export default function Pelanggan() {
 
                 <td className="px-6 py-4 ">
                   <div className="w-full h-full flex items-center justify-center gap-3 ">
-                    <button title="edit">
-                      <CiEdit size={23} className="text-green-500" />
-                    </button>
+                    <BtnEdit />
                   </div>
                 </td>
               </tr>

@@ -3,13 +3,13 @@ import { Pagination } from "@mantine/core";
 import { Link, useSearchParams } from "react-router-dom";
 import { useEffect, useState } from "react";
 import InputSearch from "../../components/ui/input-search";
-import { CiEdit } from "react-icons/ci";
 import { MdOutlineAddCircle } from "react-icons/md";
 import { useDeleteRole, useRoles } from "../../api/queries/useRoleQuery";
 import { FaRegTrashCan } from "react-icons/fa6";
 import { Alert, useHandleAlert } from "sstra-alert";
 import Loading from "../../components/layout/loading";
 import { useInvalidate } from "../../api/queries/useCustomQuery";
+import { BtnEdit } from "../../components/ui/btn-edit";
 
 export default function Roles() {
   const [activePage, setPage] = useState(1);
@@ -154,8 +154,8 @@ export default function Roles() {
                   <div className="flex items-center">
                     <input
                       id="checkbox-table-search-1"
-                      checked={idRecords.includes(item.id)}
                       type="checkbox"
+                      checked={idRecords.includes(item.id)}
                       onChange={() => handleRecords(item.id)}
                       className="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 dark:focus:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600"
                     />
@@ -201,9 +201,7 @@ export default function Roles() {
 
                 <td className="px-6 py-4 ">
                   <div className="w-full h-full flex items-center justify-center gap-3 ">
-                    <button title="edit">
-                      <CiEdit size={23} className="text-green-500" />
-                    </button>
+                    <BtnEdit />
                   </div>
                 </td>
               </tr>

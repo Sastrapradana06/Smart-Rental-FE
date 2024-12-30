@@ -1,12 +1,13 @@
 import AppShell from "../../components/template/app-shell";
-import { Pagination } from "@mantine/core";
-import { CiEdit } from "react-icons/ci";
+import { Button, Pagination } from "@mantine/core";
 import { MdOutlineAddCircle } from "react-icons/md";
 import { Link, useSearchParams } from "react-router-dom";
 import { formatDate } from "../../utils";
 import { useEffect, useState } from "react";
-import { IoMdCheckboxOutline } from "react-icons/io";
 import InputSearch from "../../components/ui/input-search";
+import { BtnEdit } from "../../components/ui/btn-edit";
+
+import { IoCheckboxSharp } from "react-icons/io5";
 const reservationsData = [
   {
     id: 1,
@@ -15,7 +16,7 @@ const reservationsData = [
     licensePlate: "B 1234 XYZ",
     startDate: "2024-12-01",
     endDate: "2024-12-03",
-    status: "Aktif",
+    status: "aktif",
     totalPrice: 1500000,
   },
   {
@@ -25,7 +26,7 @@ const reservationsData = [
     licensePlate: "D 5678 ABC",
     startDate: "2024-12-02",
     endDate: "2024-12-05",
-    status: "Selesai",
+    status: "selesai",
     totalPrice: 2000000,
   },
   {
@@ -35,7 +36,7 @@ const reservationsData = [
     licensePlate: "B 9101 DEF",
     startDate: "2024-12-05",
     endDate: "2024-12-07",
-    status: "Aktif",
+    status: "aktif",
     totalPrice: 1800000,
   },
   {
@@ -45,7 +46,7 @@ const reservationsData = [
     licensePlate: "B 1314 JKL",
     startDate: "2024-12-07",
     endDate: "2024-12-09",
-    status: "Aktif",
+    status: "aktif",
     totalPrice: 2500000,
   },
   {
@@ -55,7 +56,7 @@ const reservationsData = [
     licensePlate: "L 5678 MNO",
     startDate: "2024-12-03",
     endDate: "2024-12-05",
-    status: "Selesai",
+    status: "selesai",
     totalPrice: 3000000,
   },
   {
@@ -65,7 +66,7 @@ const reservationsData = [
     licensePlate: "H 7890 PQR",
     startDate: "2024-12-10",
     endDate: "2024-12-12",
-    status: "Aktif",
+    status: "aktif",
     totalPrice: 1700000,
   },
 
@@ -76,7 +77,7 @@ const reservationsData = [
     licensePlate: "E 3456 VWX",
     startDate: "2024-12-09",
     endDate: "2024-12-11",
-    status: "Aktif",
+    status: "aktif",
     totalPrice: 2200000,
   },
   {
@@ -86,7 +87,7 @@ const reservationsData = [
     licensePlate: "A 6789 YZA",
     startDate: "2024-12-11",
     endDate: "2024-12-13",
-    status: "Aktif",
+    status: "aktif",
     totalPrice: 2400000,
   },
 ];
@@ -195,24 +196,31 @@ export default function Reservasi() {
                 </td>
 
                 <td className="px-6 py-4">
-                  <p
-                    className={`${
-                      item.status === "Aktif"
-                        ? "bg-green-500 animate-pulse"
-                        : "bg-blue-500"
-                    } p-2  text-white w-[80px] text-center text-[.9rem] rounded-lg`}
+                  <Button
+                    variant="light"
+                    color={item.status === "aktif" ? "blue" : "green"}
+                    size="sm"
+                    radius={"md"}
                   >
                     {item.status}
-                  </p>
+                  </Button>
                 </td>
 
                 <td className="px-6 py-4 ">
                   <div className="w-full h-full flex items-center justify-center gap-3 ">
-                    <button title="edit">
-                      <CiEdit size={23} className="text-green-500" />
-                    </button>
-                    <button title="selesai">
-                      <IoMdCheckboxOutline size={23} className="text-sky-500" />
+                    <BtnEdit link={"/reservasi/create"} />
+                    <button
+                      title="selesai"
+                      disabled={item.status === "selesai"}
+                    >
+                      <IoCheckboxSharp
+                        size={25}
+                        className={`${
+                          item.status === "selesai"
+                            ? "text-gray-400"
+                            : "text-green-500"
+                        }`}
+                      />
                     </button>
                   </div>
                 </td>

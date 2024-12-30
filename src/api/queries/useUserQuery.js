@@ -1,6 +1,7 @@
 import { useMutation, useQuery } from "@tanstack/react-query";
 import {
   addUserServices,
+  deleteUserServices,
   getUserServices,
   loginUserServices,
 } from "../services/user.services";
@@ -22,5 +23,11 @@ export const useUsers = () => {
 export const useAddUser = () => {
   return useMutation({
     mutationFn: (data) => addUserServices(data),
+  });
+};
+
+export const useDeleteUser = () => {
+  return useMutation({
+    mutationFn: (id) => deleteUserServices(id),
   });
 };
