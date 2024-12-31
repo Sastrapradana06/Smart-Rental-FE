@@ -1,4 +1,4 @@
-import { GET, POST } from "../api";
+import { GET, POST, PUT } from "../api";
 
 export const addRolesServices = async (data) => {
   const api = await POST("/roles", data);
@@ -30,6 +30,16 @@ export const getRoleNameServices = async (name) => {
   return res.data;
 };
 
+export const getRoleIdServices = async (id) => {
+  const res = await GET(`/roles/id/${id}`);
+
+  if (!res.status) {
+    throw new Error(res.message);
+  }
+
+  return res.data;
+};
+
 export const deleteRoleServices = async (id) => {
   const res = await POST("/roles/delete-records", id);
 
@@ -37,4 +47,13 @@ export const deleteRoleServices = async (id) => {
     throw new Error(res.message);
   }
   return res;
+};
+
+export const editRoleServices = async ({ id, data }) => {
+  const edit = await PUT(`/roles/${id}`, data);
+
+  if (!edit.status) {
+    throw new Error(edit.message);
+  }
+  return edit;
 };

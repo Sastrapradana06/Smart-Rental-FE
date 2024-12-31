@@ -44,6 +44,7 @@ createRoot(document.getElementById("root")).render(
               <Route path="/dashboard" element={<Dashboard />} />
               <Route path="/roles" element={<Roles />} />
               <Route path="/roles/add" element={<AddRoles />} />
+              <Route path="/roles/edit/:id" element={<AddRoles />} />
             </Route>
 
             <Route element={<PrivateRouteRole page={"Unit"} />}>

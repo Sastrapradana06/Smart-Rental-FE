@@ -30,3 +30,14 @@ export const DELETE = async (endpoint, id) => {
   });
   return response.json();
 };
+
+export const PUT = async (endpoint, data) => {
+  const response = await fetch(`${baseUrl}${endpoint}`, {
+    method: "PUT",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify(data),
+  });
+  return response.json();
+};

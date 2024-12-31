@@ -228,7 +228,13 @@ export default function User() {
                 <td className="px-6 py-4">
                   <Button
                     variant="light"
-                    color={item.roles === "super admin" ? "red" : "blue"}
+                    color={
+                      item.roles === "super admin"
+                        ? "red"
+                        : item.roles === "admin"
+                        ? "yellow"
+                        : "blue"
+                    }
                     size="sm"
                     radius={"md"}
                   >

@@ -1,5 +1,5 @@
 import AppShell from "../../components/template/app-shell";
-import { Pagination } from "@mantine/core";
+import { Button, Pagination } from "@mantine/core";
 import { Link, useSearchParams } from "react-router-dom";
 import { useEffect, useState } from "react";
 import InputSearch from "../../components/ui/input-search";
@@ -171,15 +171,14 @@ export default function Roles() {
                   {index + 1}
                 </th>
                 <th scope="row" className="px-6 py-4 capitalize">
-                  <p
-                    className={`w-max font-semibold capitalize p-2 rounded-md  ${
-                      item.name == "super admin"
-                        ? "bg-red-200 text-red-500"
-                        : "bg-blue-200 text-blue-500"
-                    }`}
+                  <Button
+                    variant="light"
+                    color={item.color}
+                    size="sm"
+                    radius={"md"}
                   >
                     {item.name}
-                  </p>
+                  </Button>
                 </th>
                 <td className="px-6 py-4">
                   <p className="w-max font-semibold capitalize text-[.9rem] text-gray-600 bg-gray-200 p-2 rounded-md">
@@ -201,7 +200,7 @@ export default function Roles() {
 
                 <td className="px-6 py-4 ">
                   <div className="w-full h-full flex items-center justify-center gap-3 ">
-                    <BtnEdit />
+                    <BtnEdit link={`/roles/edit/${item.id}`} />
                   </div>
                 </td>
               </tr>
