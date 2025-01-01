@@ -35,6 +35,8 @@ export const useRoleName = (role) => {
       const [, role] = queryKey;
       return getRoleNameServices(role);
     },
+    enabled: !!role,
+    placeholderData: null,
   });
 };
 

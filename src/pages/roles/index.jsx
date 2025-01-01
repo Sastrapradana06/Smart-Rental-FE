@@ -75,6 +75,8 @@ export default function Roles() {
     });
   };
 
+  console.log({ roles });
+
   const handlePageChange = (page) => {
     setPage(page);
     searchParams.set("page", page);

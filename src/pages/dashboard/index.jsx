@@ -4,8 +4,12 @@ import { IoMdCheckbox } from "react-icons/io";
 import { FaCalendarCheck } from "react-icons/fa";
 import { MdOutlineShowChart } from "react-icons/md";
 import { BarChart, AreaChart } from "@mantine/charts";
+import { useRoleName } from "../../api/queries/useRoleQuery";
 
 export default function Dashboard() {
+  const user = JSON.parse(localStorage.getItem("user"));
+  useRoleName(user?.roles);
+
   const dataProfit = [
     { month: "January", PROFIT: 5000000 },
     { month: "February", PROFIT: 3000000 },

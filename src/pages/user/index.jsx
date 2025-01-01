@@ -88,6 +88,7 @@ export default function User() {
         searchParams.delete("search");
         setSearchParams(searchParams);
         search = null;
+        await invalidateListQuery("users");
         await invalidateListQuery("roles");
       },
       onError: (error) => {

@@ -46,6 +46,7 @@ export default function AddUsers() {
         });
         handleAlert("success", res.message);
         await invalidateListQuery("users");
+        await invalidateListQuery("roles");
       },
       onError: (err) => {
         console.log(err);
