@@ -62,7 +62,10 @@ export default function Login() {
             Access your account to continue.
           </p>
           <Formik
-            initialValues={{ email: "admin@gmail.com", password: "admin123" }}
+            initialValues={{
+              email: "superadmin@gmail.com",
+              password: "superadmin123",
+            }}
             validationSchema={LoginSchema}
             onSubmit={(values) => {
               handleSubmit(values);

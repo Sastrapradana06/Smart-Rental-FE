@@ -1,9 +1,13 @@
 import AppShell from "../../components/template/app-shell";
-import { Link } from "react-router-dom";
+import { Link, useNavigate, useParams } from "react-router-dom";
 import { IoIosArrowBack } from "react-icons/io";
 import { Button, Select, TextInput, Textarea } from "@mantine/core";
-import { useState } from "react";
-import { useAddUser } from "../../api/queries/useUserQuery";
+import { useEffect, useState } from "react";
+import {
+  useAddUser,
+  useEditUser,
+  useUserId,
+} from "../../api/queries/useUserQuery";
 import Loading from "../../components/layout/loading";
 import { Alert, useHandleAlert } from "sstra-alert";
 import { useInvalidate } from "../../api/queries/useCustomQuery";
@@ -19,10 +23,14 @@ export default function AddUsers() {
     roles: "",
   });
   const { status, data: alert, handleAlert } = useHandleAlert();
+  const { id } = useParams();
+  const navigate = useNavigate();
 
   const { mutate, isPending } = useAddUser();
   const { invalidateListQuery } = useInvalidate();
   const { data: roles, isLoading } = useRoles();
+  const { data: userId, isPending: isPendingUserId } = useUserId(id ? id : "");
+  const editUser = useEditUser();
 
   const handleInputValue = (field, value) => {
     setValueInput((prev) => ({
@@ -34,26 +42,57 @@ export default function AddUsers() {
   const handleSubmit = async (e) => {
     e.preventDefault();
 
-    mutate(valueInput, {
-      onSuccess: async (res) => {
-        setValueInput({
-          name: "",
-          email: "",
-          notel: "",
-          jekel: "laki-laki",
-          alamat: "",
-          roles: "",
-        });
-        handleAlert("success", res.message);
-        await invalidateListQuery("users");
-        await invalidateListQuery("roles");
-      },
-      onError: (err) => {
-        console.log(err);
-        handleAlert("error", err.message);
-      },
-    });
+    if (!id) {
+      mutate(valueInput, {
+        onSuccess: async (res) => {
+          setValueInput({
+            name: "",
+            email: "",
+            notel: "",
+            jekel: "laki-laki",
+            alamat: "",
+            roles: "",
+          });
+          handleAlert("success", res.message);
+          await invalidateListQuery("users");
+          await invalidateListQuery("roles");
+        },
+        onError: (err) => {
+          console.log(err);
+          handleAlert("error", err.message);
+        },
+      });
+    } else {
+      const dataUpdate = { id, data: valueInput };
+      editUser.mutate(dataUpdate, {
+        onSuccess: async (res) => {
+          handleAlert("success", res.message);
+          await invalidateListQuery("users");
+          await invalidateListQuery("roles");
+          setTimeout(() => {
+            navigate("/users");
+          }, 1000);
+        },
+        onError: (err) => {
+          console.log(err);
+          handleAlert("error", err.message);
+        },
+      });
+    }
   };
+
+  useEffect(() => {
+    if (userId) {
+      setValueInput({
+        name: userId.name,
+        email: userId.email,
+        notel: userId.notel,
+        jekel: userId.jekel,
+        alamat: userId.alamat,
+        roles: userId.roles,
+      });
+    }
+  }, [userId]);
 
   return (
     <AppShell>
@@ -63,13 +102,15 @@ export default function AddUsers() {
         message={alert.message}
         background={"bg-white"}
       />
-      {isPending && <Loading />}
+      {isPending || (isPendingUserId && <Loading />)}
       <main className="w-full">
         <div className="flex items-center gap-2">
           <Link to="/users">
             <IoIosArrowBack size={23} />
           </Link>
-          <h1 className="text-[1.1rem] lg:text-[1.3rem]">Tambah Users</h1>
+          <h1 className="text-[1.1rem] lg:text-[1.3rem]">
+            {id ? "Edit" : "Tambah"} Users
+          </h1>
         </div>
         <form
           className="w-full lg:w-[85%] flex flex-col gap-3 mt-8"
@@ -126,7 +167,8 @@ export default function AddUsers() {
               required
               size="md"
               radius={"md"}
-              className="w-full lg:w-[50%]"
+              disabled={id}
+              className="w-full lg:w-[50%] disabled:bg-gray-700"
               placeholder="Pilih roles"
               data={isLoading ? [] : roles.map((item) => item.name)}
               defaultValue={isLoading ? "" : roles[0].name}
@@ -167,7 +209,7 @@ export default function AddUsers() {
               type="submit"
               fullWidth
             >
-              Simpan
+              {id ? "Edit" : "Tambah"}
             </Button>
           </div>
         </form>

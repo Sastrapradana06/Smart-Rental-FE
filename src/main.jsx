@@ -42,13 +42,12 @@ createRoot(document.getElementById("root")).render(
 
             <Route element={<PrivateRoute />}>
               <Route path="/dashboard" element={<Dashboard />} />
-              <Route path="/roles" element={<Roles />} />
-              <Route path="/roles/add" element={<AddRoles />} />
-              <Route path="/roles/edit/:id" element={<AddRoles />} />
             </Route>
 
             <Route element={<PrivateRouteRole page={"Unit"} />}>
               <Route path="/unit" element={<Unit />} />
+              <Route path="/unit/add" element={<AddUnit />} />
+              <Route path="/unit/:id" element={<DetailUnit />} />
             </Route>
 
             <Route element={<PrivateRouteRole page={"Reservasi"} />}>
@@ -56,15 +55,26 @@ createRoot(document.getElementById("root")).render(
               <Route path="/reservasi/create" element={<CreateReservasi />} />
             </Route>
 
-            <Route path="/unit/add" element={<AddUnit />} />
-            <Route path="/unit/:id" element={<DetailUnit />} />
+            <Route element={<PrivateRouteRole page={"Pelanggan"} />}>
+              <Route path="/pelanggan" element={<Pelanggan />} />
+              <Route path="/pelanggan/add" element={<AddPelanggan />} />
+            </Route>
 
-            <Route path="/pelanggan" element={<Pelanggan />} />
-            <Route path="/pelanggan/add" element={<AddPelanggan />} />
+            <Route element={<PrivateRouteRole page={"Users"} />}>
+              <Route path="/users" element={<User />} />
+              <Route path="/users/add" element={<AddUsers />} />
+              <Route path="/users/edit/:id" element={<AddUsers />} />
+            </Route>
 
-            <Route path="/transaksi" element={<Transaksi />} />
-            <Route path="/users" element={<User />} />
-            <Route path="/users/add" element={<AddUsers />} />
+            <Route element={<PrivateRouteRole page={"Transaksi"} />}>
+              <Route path="/transaksi" element={<Transaksi />} />
+            </Route>
+
+            <Route element={<PrivateRouteRole page={"Roles"} />}>
+              <Route path="/roles" element={<Roles />} />
+              <Route path="/roles/add" element={<AddRoles />} />
+              <Route path="/roles/edit/:id" element={<AddRoles />} />
+            </Route>
           </Routes>
           <ReactQueryDevtools initialIsOpen={true} />
         </BrowserRouter>

@@ -1,4 +1,4 @@
-import { GET, POST } from "../api";
+import { GET, POST, PUT } from "../api";
 import Cookies from "js-cookie";
 export const loginUserServices = async (email, password) => {
   const api = await POST("/auth/login", { email, password });
@@ -44,4 +44,23 @@ export const deleteUserServices = async (id) => {
     throw new Error(res.message);
   }
   return res;
+};
+
+export const getUserIdServices = async (id) => {
+  const res = await GET(`/users/${id}`);
+
+  if (!res.status) {
+    throw new Error(res.message);
+  }
+
+  return res.data;
+};
+
+export const editUserServices = async ({ id, data }) => {
+  const edit = await PUT(`/users/${id}`, data);
+
+  if (!edit.status) {
+    throw new Error(edit.message);
+  }
+  return edit;
 };

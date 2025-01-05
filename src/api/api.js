@@ -36,6 +36,7 @@ export const PUT = async (endpoint, data) => {
     method: "PUT",
     headers: {
       "Content-Type": "application/json",
+      Authorization: `Bearer ${Cookies.get("token")}`,
     },
     body: JSON.stringify(data),
   });

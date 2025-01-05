@@ -245,7 +245,7 @@ export default function User() {
 
                 <td className="px-6 py-4 ">
                   <div className="w-full h-full flex items-center justify-center gap-3 ">
-                    <BtnEdit link={"/users/add"} />
+                    <BtnEdit link={"/users/edit/" + item.id} title={"edit"} />
                   </div>
                 </td>
               </tr>
